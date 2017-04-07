@@ -1,8 +1,25 @@
 #pragma once
 #include <Windows.h>
+#include <map>
+#include <vector>
+#include <string>
+#include "ComSpecific.h"
+using namespace std;
 struct MACH_SOURCE
 {
 	int * commands;
-	unsigned int size;
+	unsigned size = 0;
 };
-extern "C" __declspec(dllexport) int Compile(LPWSTR source, MACH_SOURCE * mach_source);
+struct CONTR_POINTS
+{
+	// value
+	unsigned target_line;
+	// commands to which the value will be substituted
+	vector <unsigned> places;
+};
+// result 1 - command error;
+int Command(wstring source);
+int Adress(wstring source);
+int Value(wstring source, bool * error);
+vector <wstring> CompareComWord(LPWSTR source,unsigned * symbol_id, bool * is_error);
+extern "C" __declspec(dllexport) int Compile(LPWSTR source, void ** mach_source);
