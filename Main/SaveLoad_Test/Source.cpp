@@ -4,9 +4,17 @@ using namespace std;
 
 int main()
 {
-	ofstream fout; 
-	fout.open("infa.txt", ios_base::trunc);
-	fout << "Examlesebgdfgh";
+	fstream fout; 
+	fout.open("infa.txt",ios::out);
+	if (fout.is_open())
+	{
+		cout << "ok\n";
+	}
+	else
+	{
+		cout << "no\n";
+	}
+	fout << "Extteee";
 	fout.close();
 	system("pause");
 	return 0;
