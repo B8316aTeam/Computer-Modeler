@@ -1,5 +1,6 @@
 #pragma once
 #include<Windows.h>
+
 struct MACH_STATE 
 {
 	int registers[8];
@@ -8,6 +9,7 @@ struct MACH_STATE
 	int input_reg;
 	bool is_end_work;
 };
+
 struct SAVE_DATA
 {
 	LPWSTR sorce_code;
@@ -15,4 +17,7 @@ struct SAVE_DATA
 	int * memory_state;
 	unsigned int memory_size;
 };
+
 extern "C" __declspec(dllexport) bool Save(char * path, SAVE_DATA data);
+
+extern "C" __declspec(dllexport) SAVE_DATA Load(char * path);

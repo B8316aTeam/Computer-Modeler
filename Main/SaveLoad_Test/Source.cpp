@@ -14,7 +14,7 @@ int main()
 	{
 		cout << "no\n";
 	}
-	fout << "Extteee";
+	fout << "Extteesaaaaaaaaaaaadfe";
 	fout.close();
 	system("pause");
 	return 0;
