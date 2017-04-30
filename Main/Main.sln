@@ -8,6 +8,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Compiler", "Compiler\Compiler.vcxproj", "{AA094BD0-8E7B-427D-9594-B956A3672B3C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Compiler_Test", "Compiler_Test\Compiler_Test.vcxproj", "{3B7F1E3B-6724-4C13-BCC4-40561A627F20}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AA094BD0-8E7B-427D-9594-B956A3672B3C} = {AA094BD0-8E7B-427D-9594-B956A3672B3C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
