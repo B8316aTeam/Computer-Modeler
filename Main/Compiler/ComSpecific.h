@@ -1,4 +1,5 @@
 #pragma once
+#define MAX_NUMBER 8388608
 enum COMMAND
 {
 	htl = 0x00000000,
@@ -21,7 +22,7 @@ enum ADRESS_TYPE
 	none = 0x00000000,
 	hash = 0x04000000,
 	sob = 0x08000000,
-	rez = 0x0C000000
+	reg = 0x0C000000
 };
 enum SIGN_TYPE
 {
