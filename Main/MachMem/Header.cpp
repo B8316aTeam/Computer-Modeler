@@ -4,7 +4,7 @@
 bool GetData(void * memory, unsigned id_cell, int * data)
 {
 	MEMORY * memory_ = (MEMORY *)memory;
-	if (memory_->size < id_cell)
+	if (memory_->size > id_cell)
 	{
 		*data = memory_->mem_[id_cell];
 		return false;
@@ -15,7 +15,7 @@ bool GetData(void * memory, unsigned id_cell, int * data)
 bool SetData(void * memory, unsigned id_cell, int data)
 {
 	MEMORY * memory_ = (MEMORY *)memory;
-	if (memory_->size < id_cell)
+	if (memory_->size > id_cell)
 	{
 		memory_->mem_[id_cell] = data;
 		return false;
