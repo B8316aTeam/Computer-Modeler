@@ -20,6 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />
+    <ClInclude Include="Specific.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Header.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BFD7636F-CB07-4025-A882-FADEAFFF3F4B}</ProjectGuid>
