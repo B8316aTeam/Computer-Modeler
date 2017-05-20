@@ -151,6 +151,8 @@
     <ClInclude Include="MachCoreClass.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Header.cpp" />
+    <ClCompile Include="MachCoreClass.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
