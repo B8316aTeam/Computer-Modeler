@@ -5,14 +5,13 @@ using namespace std;
 bool Save(char * path, SAVE_DATA data)
 {
 	ofstream fout(path, ios::out | ios::binary);
+	unsigned size_sourse_code = 0;
+	while (data.sorce_code[size_sourse_code] != L'\0')
+		size_sourse_code++;
+	size_sourse_code++;
 	//ïîäñ÷¸ò ðàçìåðà sorse_code è ñ÷èòûâàíèå ðàçìåðà â ôàéë è ñàìî ñëîâî
-	int size_sorse_code = 0;
-	while (data.sorce_code[size_sorse_code]!='\0')
-	{
-		size_sorse_code++;
-	}
-	fout.write((char*)&size_sorse_code, sizeof size_sorse_code);
-	fout.write((char*)data.sorce_code, sizeof(wchar_t)*size_sorse_code);
+	fout.write((char*)&size_sourse_code, sizeof size_sourse_code);
+	fout.write((char*)data.sorce_code, sizeof(wchar_t)*size_sourse_code);
 	//111111111111111111111111111111111111
 	//ðåãèñòð
 	fout.write((char*)data.mach_state.registers, sizeof (int) * 8);
