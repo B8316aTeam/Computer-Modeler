@@ -35,20 +35,29 @@ namespace Main
             this.richTextBox9.Visible = true;
             this.richTextBox10.Visible = true;
 
-            this.button1.Text = "остановить выполн.";
-            this.button2.Text = "непр выполн.";
-            this.button3.Text = "один такт";
             this.dataGridView2.Visible = false;
+
+            this.button4.Visible = true;
+            this.button5.Visible = true;
+            this.button6.Visible = true;
+            this.button1.Visible = false;
+            this.button2.Visible = false;
+            this.button3.Visible = false;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
+
+
+            this.button4.Visible = false;
+            this.button5.Visible = false;
+            this.button6.Visible = false;
+            this.button1.Visible = true;
+            this.button2.Visible = true;
+            this.button3.Visible = true;
+
+
             this.dataGridView2.Visible = true;
-
-
-            this.button1.Text = "сохр.";
-            this.button2.Text = "загр.";
-            this.button3.Text = "выполн.";
 
             this.richTextBox6.Visible = false;
             this.richTextBox7.Visible = false;

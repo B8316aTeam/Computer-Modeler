@@ -72,6 +72,9 @@
             this.richTextBox8 = new System.Windows.Forms.RichTextBox();
             this.richTextBox9 = new System.Windows.Forms.RichTextBox();
             this.richTextBox10 = new System.Windows.Forms.RichTextBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.Панель.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -86,7 +89,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "сохранить";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // comboBox1
             // 
@@ -428,11 +431,44 @@
             this.richTextBox10.Text = "возврат в исх.сост";
             this.richTextBox10.Visible = false;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(96, 12);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(149, 23);
+            this.button4.TabIndex = 16;
+            this.button4.Text = "ост. выполнение";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Visible = false;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(298, 12);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(149, 23);
+            this.button5.TabIndex = 17;
+            this.button5.Text = "непр. выполнение";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Visible = false;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(502, 12);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(149, 23);
+            this.button6.TabIndex = 18;
+            this.button6.Text = "один такт";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(751, 704);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.richTextBox10);
             this.Controls.Add(this.richTextBox9);
             this.Controls.Add(this.richTextBox8);
@@ -502,6 +538,9 @@
         private System.Windows.Forms.RichTextBox richTextBox8;
         private System.Windows.Forms.RichTextBox richTextBox9;
         private System.Windows.Forms.RichTextBox richTextBox10;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
     }
 }
 
