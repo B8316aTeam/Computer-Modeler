@@ -30,9 +30,9 @@ namespace Main
             this.Visible = false;
             form2.Show();*/
             this.richTextBox6.Visible = true;
-            this.richTextBox7.Visible = true;
+            
   
-            this.richTextBox9.Visible = true;
+            
             
 
             this.label9.Visible = true;
@@ -64,18 +64,18 @@ namespace Main
             this.button2.Visible = true;
             this.button3.Visible = true;
 
-            this.label9.Visible = false;
+            this.label9.Visible = true;
             
-            this.label11.Visible = false;
+            this.label11.Visible = true;
             
 
 
             
 
             this.richTextBox6.Visible = true;
-            this.richTextBox7.Visible = false;
+            
             this.button8.Visible = false;
-            this.richTextBox9.Visible = false;
+            
             this.button9.Visible = false;
         }
     }

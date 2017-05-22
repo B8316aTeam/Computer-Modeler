@@ -79,8 +79,6 @@
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.richTextBox6 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox7 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox9 = new System.Windows.Forms.RichTextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -92,6 +90,8 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.textBox12 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.Панель.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -226,6 +226,8 @@
             // 
             this.Панель.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Панель.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Панель.Controls.Add(this.textBox12);
+            this.Панель.Controls.Add(this.textBox11);
             this.Панель.Controls.Add(this.label21);
             this.Панель.Controls.Add(this.label20);
             this.Панель.Controls.Add(this.label19);
@@ -236,11 +238,9 @@
             this.Панель.Controls.Add(this.label9);
             this.Панель.Controls.Add(this.label7);
             this.Панель.Controls.Add(this.label6);
-            this.Панель.Controls.Add(this.richTextBox9);
             this.Панель.Controls.Add(this.label5);
             this.Панель.Controls.Add(this.label4);
             this.Панель.Controls.Add(this.label3);
-            this.Панель.Controls.Add(this.richTextBox7);
             this.Панель.Controls.Add(this.label2);
             this.Панель.Controls.Add(this.label1);
             this.Панель.Controls.Add(this.textBox10);
@@ -263,7 +263,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(191, 37);
+            this.label14.Location = new System.Drawing.Point(201, 51);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(101, 13);
             this.label14.TabIndex = 24;
@@ -272,7 +272,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(28, 37);
+            this.label13.Location = new System.Drawing.Point(41, 51);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(92, 13);
             this.label13.TabIndex = 23;
@@ -567,26 +567,6 @@
             this.richTextBox6.TabIndex = 11;
             this.richTextBox6.Text = "";
             // 
-            // richTextBox7
-            // 
-            this.richTextBox7.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.richTextBox7.Location = new System.Drawing.Point(31, 126);
-            this.richTextBox7.Name = "richTextBox7";
-            this.richTextBox7.Size = new System.Drawing.Size(122, 23);
-            this.richTextBox7.TabIndex = 12;
-            this.richTextBox7.Text = "";
-            this.richTextBox7.Visible = false;
-            // 
-            // richTextBox9
-            // 
-            this.richTextBox9.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.richTextBox9.Location = new System.Drawing.Point(194, 126);
-            this.richTextBox9.Name = "richTextBox9";
-            this.richTextBox9.Size = new System.Drawing.Size(122, 23);
-            this.richTextBox9.TabIndex = 14;
-            this.richTextBox9.Text = "";
-            this.richTextBox9.Visible = false;
-            // 
             // button4
             // 
             this.button4.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -625,23 +605,21 @@
             // 
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(28, 101);
+            this.label9.Location = new System.Drawing.Point(45, 101);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(88, 13);
             this.label9.TabIndex = 19;
             this.label9.Text = "Счётчик команд";
-            this.label9.Visible = false;
             // 
             // label11
             // 
             this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(191, 101);
+            this.label11.Location = new System.Drawing.Point(221, 101);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(81, 13);
             this.label11.TabIndex = 21;
             this.label11.Text = "Переполнение";
-            this.label11.Visible = false;
             // 
             // label15
             // 
@@ -702,6 +680,20 @@
             this.label21.TabIndex = 27;
             this.label21.Text = "Область процессора";
             // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(31, 117);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(122, 20);
+            this.textBox11.TabIndex = 28;
+            // 
+            // textBox12
+            // 
+            this.textBox12.Location = new System.Drawing.Point(194, 117);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(122, 20);
+            this.textBox12.TabIndex = 29;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -719,11 +711,9 @@
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.richTextBox6);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.Панель.ResumeLayout(false);
             this.Панель.PerformLayout();
@@ -770,8 +760,6 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.RichTextBox richTextBox6;
-        private System.Windows.Forms.RichTextBox richTextBox7;
-        private System.Windows.Forms.RichTextBox richTextBox9;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
@@ -799,6 +787,8 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.TextBox textBox11;
     }
 }
 
