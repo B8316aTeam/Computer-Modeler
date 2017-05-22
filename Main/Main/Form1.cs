@@ -35,6 +35,11 @@ namespace Main
             this.richTextBox9.Visible = true;
             this.richTextBox10.Visible = true;
 
+            this.label9.Visible = true;
+            this.label10.Visible = true;
+            this.label11.Visible = true;
+            this.label12.Visible = true;
+
             this.dataGridView2.Visible = false;
 
             this.button4.Visible = true;
@@ -55,6 +60,11 @@ namespace Main
             this.button1.Visible = true;
             this.button2.Visible = true;
             this.button3.Visible = true;
+
+            this.label9.Visible = false;
+            this.label10.Visible = false;
+            this.label11.Visible = false;
+            this.label12.Visible = false;
 
 
             this.dataGridView2.Visible = true;
