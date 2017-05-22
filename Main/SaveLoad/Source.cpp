@@ -4,7 +4,7 @@ using namespace std;
 
 bool Save(char * path, SAVE_DATA data)
 {
-	ofstream fout(path, ios::out | ios::binary);
+	fstream fout(path, ios::out | ios::binary);
 	unsigned size_sourse_code = 0;
 	while (data.sorce_code[size_sourse_code] != L'\0')
 		size_sourse_code++;
