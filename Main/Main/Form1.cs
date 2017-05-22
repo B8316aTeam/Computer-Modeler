@@ -31,9 +31,9 @@ namespace Main
             form2.Show();*/
             this.richTextBox6.Visible = true;
             this.richTextBox7.Visible = true;
-            this.richTextBox8.Visible = true;
+  
             this.richTextBox9.Visible = true;
-            this.richTextBox10.Visible = true;
+            
 
             this.label9.Visible = true;
             this.label10.Visible = true;
@@ -41,6 +41,9 @@ namespace Main
             this.label12.Visible = true;
 
             this.dataGridView2.Visible = false;
+
+            this.button8.Visible = true;
+            this.button9.Visible = true;
 
             this.button4.Visible = true;
             this.button5.Visible = true;
@@ -71,9 +74,9 @@ namespace Main
 
             this.richTextBox6.Visible = false;
             this.richTextBox7.Visible = false;
-            this.richTextBox8.Visible = false;
+            this.button8.Visible = false;
             this.richTextBox9.Visible = false;
-            this.richTextBox10.Visible = false;
+            this.button9.Visible = false;
         }
     }
 
