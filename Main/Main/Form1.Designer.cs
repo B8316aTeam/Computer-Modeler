@@ -1,4 +1,5 @@
-﻿namespace Main
+﻿using System.Runtime.InteropServices;
+namespace Main
 {
     partial class Form1
     {
@@ -46,6 +47,16 @@
             this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Панель = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
@@ -59,39 +70,23 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.button7 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.richTextBox6 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox7 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox8 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox9 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox10 = new System.Windows.Forms.RichTextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.Панель.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -100,8 +95,8 @@
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Location = new System.Drawing.Point(96, 29);
             this.button1.Name = "button1";
@@ -112,14 +107,14 @@
             // 
             // comboBox1
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.DisplayMember = "двоичное";
             this.comboBox1.Items.AddRange(new object[] {
-                "Двоичное",
-                "Десятичное",
-                "Шестнадцатиричное"});
+            "Двоичное",
+            "Десятичное",
+            "Шестнадцатиричное"});
             this.comboBox1.Location = new System.Drawing.Point(195, 13);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
@@ -129,21 +124,21 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-                this.Data,
-                this.data1,
-                this.Column2,
-                this.Column3,
-                this.Column4,
-                this.Column5,
-                this.Column6,
-                this.Column7,
-                this.Column8,
-                this.Column9,
-                this.Column10,
-                this.Column11,
-                this.Column12,
-                this.Column13,
-                this.Column14});
+            this.Data,
+            this.data1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6,
+            this.Column7,
+            this.Column8,
+            this.Column9,
+            this.Column10,
+            this.Column11,
+            this.Column12,
+            this.Column13,
+            this.Column14});
             this.dataGridView1.Location = new System.Drawing.Point(3, 466);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(745, 226);
@@ -226,8 +221,8 @@
             // 
             // Панель
             // 
-            this.Панель.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.Панель.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Панель.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Панель.Controls.Add(this.label14);
@@ -257,10 +252,100 @@
             this.Панель.TabIndex = 6;
             this.Панель.Tag = "";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(208, -2);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(99, 13);
+            this.label14.TabIndex = 24;
+            this.label14.Text = "тип отобр. данных";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(28, -2);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(91, 13);
+            this.label13.TabIndex = 23;
+            this.label13.Text = "входной регистр";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(167, 182);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(13, 13);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "7";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(167, 146);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(13, 13);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "6";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(167, 105);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(13, 13);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "5";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(167, 69);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(13, 13);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "4";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 182);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(13, 13);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "3";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 146);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(13, 13);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "2";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 105);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(13, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "1";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 69);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(13, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "0";
+            // 
             // textBox10
             // 
-            this.textBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.textBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox10.Location = new System.Drawing.Point(31, 102);
             this.textBox10.Name = "textBox10";
@@ -269,8 +354,8 @@
             // 
             // textBox9
             // 
-            this.textBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.textBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox9.Location = new System.Drawing.Point(31, 143);
             this.textBox9.Name = "textBox9";
@@ -279,8 +364,8 @@
             // 
             // textBox8
             // 
-            this.textBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.textBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox8.Location = new System.Drawing.Point(31, 179);
             this.textBox8.Name = "textBox8";
@@ -289,8 +374,8 @@
             // 
             // textBox7
             // 
-            this.textBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.textBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox7.Location = new System.Drawing.Point(186, 66);
             this.textBox7.Name = "textBox7";
@@ -299,8 +384,8 @@
             // 
             // textBox6
             // 
-            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox6.Location = new System.Drawing.Point(186, 101);
             this.textBox6.Name = "textBox6";
@@ -309,8 +394,8 @@
             // 
             // textBox5
             // 
-            this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox5.Location = new System.Drawing.Point(186, 145);
             this.textBox5.Name = "textBox5";
@@ -319,8 +404,8 @@
             // 
             // textBox4
             // 
-            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox4.Location = new System.Drawing.Point(186, 179);
             this.textBox4.Name = "textBox4";
@@ -329,8 +414,8 @@
             // 
             // textBox3
             // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox3.Location = new System.Drawing.Point(31, 66);
             this.textBox3.Name = "textBox3";
@@ -339,8 +424,8 @@
             // 
             // textBox2
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.Location = new System.Drawing.Point(31, 40);
             this.textBox2.Name = "textBox2";
@@ -351,8 +436,8 @@
             // 
             // textBox1
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Location = new System.Drawing.Point(31, 14);
             this.textBox1.Name = "textBox1";
@@ -362,8 +447,8 @@
             // 
             // button2
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Location = new System.Drawing.Point(298, 29);
             this.button2.Name = "button2";
@@ -374,8 +459,8 @@
             // 
             // button3
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.Location = new System.Drawing.Point(502, 29);
             this.button3.Name = "button3";
@@ -387,8 +472,8 @@
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.label16);
             this.panel2.Controls.Add(this.label18);
@@ -396,20 +481,63 @@
             this.panel2.Controls.Add(this.comboBox3);
             this.panel2.Controls.Add(this.comboBox2);
             this.panel2.Controls.Add(this.button7);
-            this.panel2.Controls.Add(this.richTextBox2);
             this.panel2.Controls.Add(this.richTextBox1);
             this.panel2.Location = new System.Drawing.Point(12, 344);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(727, 100);
             this.panel2.TabIndex = 9;
             // 
-            // richTextBox2
+            // label16
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(22, 57);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(123, 37);
-            this.richTextBox2.TabIndex = 1;
-            this.richTextBox2.Text = "";
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(199, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(96, 13);
+            this.label16.TabIndex = 26;
+            this.label16.Text = "тип отобр.данных";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(19, 41);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(149, 13);
+            this.label18.TabIndex = 28;
+            this.label18.Text = "Данные,вводимые в ячейку";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(201, 41);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(94, 13);
+            this.label17.TabIndex = 27;
+            this.label17.Text = "тип введ. данных";
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(200, 57);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(121, 21);
+            this.comboBox3.TabIndex = 6;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(200, 16);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.TabIndex = 5;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(387, 0);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(134, 94);
+            this.button7.TabIndex = 4;
+            this.button7.Text = "Ввод";
+            this.button7.UseVisualStyleBackColor = true;
             // 
             // richTextBox1
             // 
@@ -421,12 +549,12 @@
             // 
             // dataGridView2
             // 
-            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-                this.Column1});
+            this.Column1});
             this.dataGridView2.Location = new System.Drawing.Point(12, 87);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(342, 226);
@@ -436,71 +564,12 @@
             // 
             this.Column1.HeaderText = "";
             this.Column1.Name = "Column1";
-            // 
-            // richTextBox6
-            // 
-            this.richTextBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox6.Location = new System.Drawing.Point(12, 68);
-            this.richTextBox6.Name = "richTextBox6";
-            this.richTextBox6.Size = new System.Drawing.Size(342, 126);
-            this.richTextBox6.TabIndex = 11;
-            this.richTextBox6.Text = "";
-            this.richTextBox6.Visible = false;
-            // 
-            // richTextBox7
-            // 
-            this.richTextBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox7.Location = new System.Drawing.Point(21, 210);
-            this.richTextBox7.Name = "richTextBox7";
-            this.richTextBox7.Size = new System.Drawing.Size(122, 23);
-            this.richTextBox7.TabIndex = 12;
-            this.richTextBox7.Text = "";
-            this.richTextBox7.Visible = false;
-            // 
-            // richTextBox8
-            // 
-            this.richTextBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox8.Location = new System.Drawing.Point(21, 250);
-            this.richTextBox8.Name = "richTextBox8";
-            this.richTextBox8.Size = new System.Drawing.Size(122, 37);
-            this.richTextBox8.TabIndex = 13;
-            this.richTextBox8.Text = "";
-            this.richTextBox8.Visible = false;
-            // 
-            // richTextBox9
-            // 
-            this.richTextBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox9.Location = new System.Drawing.Point(175, 210);
-            this.richTextBox9.Name = "richTextBox9";
-            this.richTextBox9.Size = new System.Drawing.Size(122, 23);
-            this.richTextBox9.TabIndex = 14;
-            this.richTextBox9.Text = "";
-            this.richTextBox9.Visible = false;
-            // 
-            // richTextBox10
-            // 
-            this.richTextBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox10.Location = new System.Drawing.Point(175, 250);
-            this.richTextBox10.Name = "richTextBox10";
-            this.richTextBox10.Size = new System.Drawing.Size(122, 37);
-            this.richTextBox10.TabIndex = 15;
-            this.richTextBox10.Text = "";
-            this.richTextBox10.Visible = false;
+           
             // 
             // button4
             // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button4.Location = new System.Drawing.Point(96, 12);
             this.button4.Name = "button4";
@@ -513,8 +582,8 @@
             // 
             // button5
             // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button5.Location = new System.Drawing.Point(298, 12);
             this.button5.Name = "button5";
@@ -526,8 +595,8 @@
             // 
             // button6
             // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button6.Location = new System.Drawing.Point(502, 12);
             this.button6.Name = "button6";
@@ -536,103 +605,6 @@
             this.button6.Text = "один такт";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Visible = false;
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(387, 0);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(134, 94);
-            this.button7.TabIndex = 4;
-            this.button7.Text = "Ввод";
-            this.button7.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 69);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(13, 13);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "0";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 105);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(13, 13);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "1";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 146);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(13, 13);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "2";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 182);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(13, 13);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "3";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(167, 69);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(13, 13);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "4";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(167, 105);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(13, 13);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "5";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(167, 146);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(13, 13);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "6";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(167, 182);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(13, 13);
-            this.label8.TabIndex = 21;
-            this.label8.Text = "7";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(200, 16);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 5;
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(200, 57);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 21);
-            this.comboBox3.TabIndex = 6;
             // 
             // label9
             // 
@@ -674,24 +646,6 @@
             this.label12.Text = "возврат в исх.состояние";
             this.label12.Visible = false;
             // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(28, -2);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(91, 13);
-            this.label13.TabIndex = 23;
-            this.label13.Text = "входной регистр";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(208, -2);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(99, 13);
-            this.label14.TabIndex = 24;
-            this.label14.Text = "тип отобр. данных";
-            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -700,33 +654,6 @@
             this.label15.Size = new System.Drawing.Size(111, 13);
             this.label15.TabIndex = 25;
             this.label15.Text = "Ячейка куда вводим";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(199, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(96, 13);
-            this.label16.TabIndex = 26;
-            this.label16.Text = "тип отобр.данных";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(201, 41);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(94, 13);
-            this.label17.TabIndex = 27;
-            this.label17.Text = "тип введ. данных";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(19, 41);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(149, 13);
-            this.label18.TabIndex = 28;
-            this.label18.Text = "Данные,вводимые в ячейку";
             // 
             // Form1
             // 
@@ -741,11 +668,6 @@
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.richTextBox10);
-            this.Controls.Add(this.richTextBox9);
-            this.Controls.Add(this.richTextBox8);
-            this.Controls.Add(this.richTextBox7);
-            this.Controls.Add(this.richTextBox6);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.button3);
@@ -802,16 +724,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.RichTextBox richTextBox6;
-        private System.Windows.Forms.RichTextBox richTextBox7;
-        private System.Windows.Forms.RichTextBox richTextBox8;
-        private System.Windows.Forms.RichTextBox richTextBox9;
-        private System.Windows.Forms.RichTextBox richTextBox10;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
@@ -836,6 +752,74 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label15;
+    }
+    namespace CompModelEx
+        {
+            class Structs
+            {
+                public struct MACH_STATE
+                {
+                    public unsafe fixed int registers[8];
+                    public int accum;
+                    public uint com_counter;
+                    public int input_reg;
+                    public bool is_end_work;
+                };
+                public struct SAVE_DATA
+                {
+                    [MarshalAs(UnmanagedType.LPWStr)]
+                    public string lpStr;
+                    public MACH_STATE mach_state;
+                    public unsafe int* memory_state;
+                    public uint memory_size;
+                };
+            }
+            class SaveLoad
+            {
+                [DllImport("SaveLoad.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+                public static extern unsafe bool Save(string path, Structs.SAVE_DATA data);
+                [DllImport("SaveLoad.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+                public static extern unsafe Structs.SAVE_DATA Load(string path);
+            }
+            class MachMem
+            {
+                [DllImport("MachMem.dll", CallingConvention = CallingConvention.Cdecl)]
+                public static extern unsafe void* Init(uint size);
+                [DllImport("MachMem.dll", CallingConvention = CallingConvention.Cdecl)]
+                public static extern unsafe bool GetData(void* memory, uint id_cell, int* data);
+                [DllImport("MachMem.dll", CallingConvention = CallingConvention.Cdecl)]
+                public static extern unsafe bool SetData(void* memory, uint id_cell, int data);
+                [DllImport("MachMem.dll", CallingConvention = CallingConvention.Cdecl)]
+                public static extern unsafe bool InitProgram(void* memory, void* mach_source);
+                [DllImport("MachMem.dll", CallingConvention = CallingConvention.Cdecl)]
+                public static extern unsafe void DeleteMemory(void* memory);
+            }
+            class MachCore
+            {
+                [DllImport("MachCore.dll", CallingConvention = CallingConvention.Cdecl)]
+                public static extern unsafe Structs.MACH_STATE Tick(void* mach);
+                [DllImport("MachCore.dll", CallingConvention = CallingConvention.Cdecl)]
+                public static extern unsafe void Reset(void* mach);
+                [DllImport("MachCore.dll", CallingConvention = CallingConvention.Cdecl)]
+                public static extern unsafe void* Init(void* memory);
+                [DllImport("MachCore.dll", CallingConvention = CallingConvention.Cdecl)]
+                public static extern unsafe void DeleteMach(void* mach);
+                [DllImport("MachCore.dll", CallingConvention = CallingConvention.Cdecl)]
+                public static extern unsafe bool SetRegData(void* mach, uint reg_id, int data);
+                [DllImport("MachCore.dll", CallingConvention = CallingConvention.Cdecl)]
+                public static extern unsafe void SetCommandNumber(void* mach, uint number);
+                [DllImport("MachCore.dll", CallingConvention = CallingConvention.Cdecl)]
+                public static extern unsafe bool SetInput(void* mach, int data);
+                [DllImport("MachCore.dll", CallingConvention = CallingConvention.Cdecl)]
+                public static extern unsafe bool SetAcum(void* mach, int data);
+            }
+            class Compiler
+            {
+                [DllImport("Compiler.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+                public static extern unsafe int Compile(string source, void** mach_source);
+                [DllImport("Compiler.dll", CallingConvention = CallingConvention.Cdecl)]
+                public static extern unsafe void DeleteMachSource(void* mach_source);
+            }
     }
 }
 
