@@ -2,9 +2,9 @@
 #include <fstream>
 using namespace std;
 
-bool Save(char * path, SAVE_DATA data)
+bool Save(wchar_t * path, SAVE_DATA data)
 {
-	ofstream fout(path, ios::out | ios::binary);
+	fstream fout(path, ios::out | ios::binary);
 	unsigned size_sourse_code = 0;
 	while (data.sorce_code[size_sourse_code] != L'\0')
 		size_sourse_code++;
@@ -27,7 +27,7 @@ bool Save(char * path, SAVE_DATA data)
 	return 0;
 }
 
-SAVE_DATA Load(char * path)
+SAVE_DATA Load(wchar_t * path)
 {
 	SAVE_DATA data;
 	ifstream fin(path, ios::in | ios::binary);

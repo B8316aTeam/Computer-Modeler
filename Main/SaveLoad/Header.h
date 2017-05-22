@@ -18,6 +18,6 @@ struct SAVE_DATA
 	unsigned int memory_size;
 };
 
-extern "C" __declspec(dllexport) bool Save(char * path, SAVE_DATA data);
+extern "C" __declspec(dllexport) bool Save(wchar_t * path, SAVE_DATA data);
 
-extern "C" __declspec(dllexport) SAVE_DATA Load(char * path);
+extern "C" __declspec(dllexport) SAVE_DATA Load(wchar_t * path);
