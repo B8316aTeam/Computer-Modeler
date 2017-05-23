@@ -235,6 +235,7 @@ unsigned CompileMachSource(vector<RAW_COM> commands, void ** mach_source)
 	// set memory for source
 	MACH_SOURCE * out  = new MACH_SOURCE(command_id);
 	command_id = 0;
+	wstring commands_list;
 	for (auto curr_raw_command = commands.begin(); curr_raw_command < commands.end(); ++curr_raw_command)
 	{
 		if ((curr_raw_command->command_.size() == 0) || (curr_raw_command->command_.size() == 2))
@@ -245,11 +246,15 @@ unsigned CompileMachSource(vector<RAW_COM> commands, void ** mach_source)
 			if (curr_raw_command->command_.back() == L"htl")
 			{
 				out->commands_[command_id-1] = COMMAND::htl;
+				commands_list += curr_raw_command->command_.back();
+				commands_list += L"\n";
 				continue;
 			}
 			if (curr_raw_command->command_.back() == L"in")
 			{
 				out->commands_[command_id-1] = COMMAND::in;
+				commands_list += curr_raw_command->command_.back();
+				commands_list += L"\n";
 				continue;
 			}
 			MessageBox(NULL, ERROR_MESSAGE(L"Неизвестная команда", curr_raw_command->command_.back()), ERROR_CAP, NULL);
@@ -259,6 +264,12 @@ unsigned CompileMachSource(vector<RAW_COM> commands, void ** mach_source)
 		bool is_reg = false;
 		if (curr_raw_command->command_[1] != L"cp")
 		{
+			commands_list += curr_raw_command->command_[0];
+			commands_list += L"\t";
+			commands_list += curr_raw_command->command_[1];
+			commands_list += L"\t";
+			commands_list += curr_raw_command->command_[2];
+			commands_list += L"\n";
 			out->commands_[command_id-1] = StringToNumber(curr_raw_command->command_.back(), &is_error, &is_reg);
 			if (is_error)
 			{
@@ -266,12 +277,18 @@ unsigned CompileMachSource(vector<RAW_COM> commands, void ** mach_source)
 				return curr_raw_command->line_;
 			}
 			if (curr_raw_command->command_[1] == L"none")
+			{
 				if (is_reg)
-					out->commands_[command_id-1] |= ADRESS_TYPE::reg;
-			if (curr_raw_command->command_[1] == L"#")
-				out->commands_[command_id-1] |= ADRESS_TYPE::hash;
-			if (curr_raw_command->command_[1] == L"@")
-				out->commands_[command_id-1] |= ADRESS_TYPE::sob;
+					out->commands_[command_id - 1] |= ADRESS_TYPE::reg;
+			}
+			else
+			{
+				if (curr_raw_command->command_[1] == L"#")
+					out->commands_[command_id - 1] |= ADRESS_TYPE::hash;
+				if (curr_raw_command->command_[1] == L"@")
+					out->commands_[command_id - 1] |= ADRESS_TYPE::sob;
+				commands_list += curr_raw_command->command_[1];
+			}
 			if (curr_raw_command->command_[0] == L"add")
 			{
 				out->commands_[command_id-1] |= COMMAND::add;
@@ -384,6 +401,9 @@ unsigned CompileMachSource(vector<RAW_COM> commands, void ** mach_source)
 			return curr_raw_command->line_;
 		}
 	}
+	commands_list += L'\0';
+	out->commands_list = new wchar_t[commands_list.size()];
+	memcpy_s(out->commands_list, sizeof(wchar_t) * commands_list.size(), commands_list.c_str(), sizeof(wchar_t) * commands_list.size());
 	*mach_source = (void *)out;
 	return 0;
 }
@@ -469,7 +489,7 @@ wchar_t * TestCompareComWord(LPWSTR source)
 	return tmp_buf;
 }
 
-int Compile(LPWSTR source,void ** mach_source)
+void * Compile(LPWSTR source,int * error_line)
 {
 	// select memory for out data
 	// id symbol in string
@@ -483,15 +503,32 @@ int Compile(LPWSTR source,void ** mach_source)
 	} while (compare_state == COMPARE_STATE::not_end);
 	if (compare_state == COMPARE_STATE::error)
 	{
-		return line;
+		*error_line = line;
+		return NULL;
 	}
-	return CompileMachSource(raw_commands, mach_source);
+	void * mach_source;
+	*error_line = CompileMachSource(raw_commands, &mach_source);
+	return mach_source;
+}
+
+LPWSTR GetCommadList(void * mach_source)
+{
+	MACH_SOURCE * tmp = ((MACH_SOURCE *)mach_source);
+	if (tmp != nullptr)
+	{
+		if (tmp->commands_list == nullptr)
+			return L"";
+	}
+	else
+		return L"";
+	return tmp->commands_list;
 }
 
 void DeleteMachSource(void * mach_source)
 {
 	delete [] ((MACH_SOURCE *)mach_source)->commands_;
-	delete mach_source;
+	delete[]((MACH_SOURCE *)mach_source)->commands_list;
+	delete ((MACH_SOURCE *)mach_source);
 }
 
 RAW_COM::RAW_COM()

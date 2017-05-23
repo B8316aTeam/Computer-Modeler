@@ -1,4 +1,5 @@
-﻿namespace Main
+﻿using System.Runtime.InteropServices;
+namespace Main
 {
     partial class Form1
     {
@@ -47,14 +48,21 @@
             this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Панель = new System.Windows.Forms.Panel();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.richTextBox9 = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.richTextBox7 = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox10 = new System.Windows.Forms.TextBox();
@@ -72,26 +80,19 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.button7 = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox6 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox7 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox9 = new System.Windows.Forms.RichTextBox();
+            this.code_block = new System.Windows.Forms.RichTextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.Панель.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -260,6 +261,34 @@
             this.Панель.TabIndex = 6;
             this.Панель.Tag = "";
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label21.Location = new System.Drawing.Point(76, 9);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(173, 18);
+            this.label21.TabIndex = 27;
+            this.label21.Text = "Область процессора";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(135, 201);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(56, 13);
+            this.label20.TabIndex = 26;
+            this.label20.Text = "Регистры";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(135, 152);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(73, 13);
+            this.label19.TabIndex = 25;
+            this.label19.Text = "Аккумулятор";
+            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -268,6 +297,17 @@
             this.label14.Size = new System.Drawing.Size(101, 13);
             this.label14.TabIndex = 24;
             this.label14.Text = "Тип отобр. данных";
+            // 
+            // label11
+            // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(191, 101);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(81, 13);
+            this.label11.TabIndex = 21;
+            this.label11.Text = "Переполнение";
+            this.label11.Visible = false;
             // 
             // label13
             // 
@@ -287,6 +327,17 @@
             this.label8.TabIndex = 21;
             this.label8.Text = "7";
             // 
+            // label9
+            // 
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(28, 101);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(88, 13);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "Счётчик команд";
+            this.label9.Visible = false;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -304,6 +355,16 @@
             this.label6.Size = new System.Drawing.Size(13, 13);
             this.label6.TabIndex = 19;
             this.label6.Text = "5";
+            // 
+            // richTextBox9
+            // 
+            this.richTextBox9.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.richTextBox9.Location = new System.Drawing.Point(194, 126);
+            this.richTextBox9.Name = "richTextBox9";
+            this.richTextBox9.Size = new System.Drawing.Size(122, 23);
+            this.richTextBox9.TabIndex = 14;
+            this.richTextBox9.Text = "";
+            this.richTextBox9.Visible = false;
             // 
             // label5
             // 
@@ -331,6 +392,16 @@
             this.label3.Size = new System.Drawing.Size(13, 13);
             this.label3.TabIndex = 16;
             this.label3.Text = "2";
+            // 
+            // richTextBox7
+            // 
+            this.richTextBox7.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.richTextBox7.Location = new System.Drawing.Point(31, 126);
+            this.richTextBox7.Name = "richTextBox7";
+            this.richTextBox7.Size = new System.Drawing.Size(122, 23);
+            this.richTextBox7.TabIndex = 12;
+            this.richTextBox7.Text = "";
+            this.richTextBox7.Visible = false;
             // 
             // label2
             // 
@@ -508,6 +579,15 @@
             this.label18.TabIndex = 28;
             this.label18.Text = "Данные,вводимые в ячейку";
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(3, 12);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(111, 13);
+            this.label15.TabIndex = 25;
+            this.label15.Text = "Ячейка куда вводим";
+            // 
             // label17
             // 
             this.label17.AutoSize = true;
@@ -558,34 +638,15 @@
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
-            // richTextBox6
+            // code_block
             // 
-            this.richTextBox6.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.richTextBox6.Location = new System.Drawing.Point(12, 68);
-            this.richTextBox6.Name = "richTextBox6";
-            this.richTextBox6.Size = new System.Drawing.Size(288, 263);
-            this.richTextBox6.TabIndex = 11;
-            this.richTextBox6.Text = "";
-            // 
-            // richTextBox7
-            // 
-            this.richTextBox7.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.richTextBox7.Location = new System.Drawing.Point(31, 126);
-            this.richTextBox7.Name = "richTextBox7";
-            this.richTextBox7.Size = new System.Drawing.Size(122, 23);
-            this.richTextBox7.TabIndex = 12;
-            this.richTextBox7.Text = "";
-            this.richTextBox7.Visible = false;
-            // 
-            // richTextBox9
-            // 
-            this.richTextBox9.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.richTextBox9.Location = new System.Drawing.Point(194, 126);
-            this.richTextBox9.Name = "richTextBox9";
-            this.richTextBox9.Size = new System.Drawing.Size(122, 23);
-            this.richTextBox9.TabIndex = 14;
-            this.richTextBox9.Text = "";
-            this.richTextBox9.Visible = false;
+            this.code_block.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.code_block.Location = new System.Drawing.Point(12, 68);
+            this.code_block.Name = "code_block";
+            this.code_block.Size = new System.Drawing.Size(288, 263);
+            this.code_block.TabIndex = 11;
+            this.code_block.Text = "";
+            this.code_block.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.code_block_KeyPress);
             // 
             // button4
             // 
@@ -621,37 +682,6 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Visible = false;
             // 
-            // label9
-            // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(28, 101);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(88, 13);
-            this.label9.TabIndex = 19;
-            this.label9.Text = "Счётчик команд";
-            this.label9.Visible = false;
-            // 
-            // label11
-            // 
-            this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(191, 101);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(81, 13);
-            this.label11.TabIndex = 21;
-            this.label11.Text = "Переполнение";
-            this.label11.Visible = false;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(3, 12);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(111, 13);
-            this.label15.TabIndex = 25;
-            this.label15.Text = "Ячейка куда вводим";
-            // 
             // button8
             // 
             this.button8.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -674,40 +704,11 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Visible = false;
             // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(135, 152);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(73, 13);
-            this.label19.TabIndex = 25;
-            this.label19.Text = "Аккумулятор";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(135, 201);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(56, 13);
-            this.label20.TabIndex = 26;
-            this.label20.Text = "Регистры";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label21.Location = new System.Drawing.Point(76, 9);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(173, 18);
-            this.label21.TabIndex = 27;
-            this.label21.Text = "Область процессора";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(751, 704);
-            this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.panel2);
@@ -718,7 +719,8 @@
             this.Controls.Add(this.Панель);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button9);
-            this.Controls.Add(this.richTextBox6);
+            this.Controls.Add(this.code_block);
+            this.Controls.Add(this.button6);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -769,7 +771,7 @@
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.RichTextBox richTextBox6;
+        private System.Windows.Forms.RichTextBox code_block;
         private System.Windows.Forms.RichTextBox richTextBox7;
         private System.Windows.Forms.RichTextBox richTextBox9;
         private System.Windows.Forms.Button button4;
@@ -799,6 +801,84 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Label label21;
+        private string source_code;
+        private unsafe void* mach_source;
+        int select_start = 0;
+        int select_end = 0;
+    }
+    namespace CompModelEx
+    {
+        class Structs
+        {
+            public unsafe struct COMMAND_LIST
+            {
+                public System.IntPtr ptr;
+            };
+            public struct MACH_STATE
+            {
+                public unsafe fixed int registers[8];
+                public int accum;
+                public uint com_counter;
+                public int input_reg;
+                public bool is_end_work;
+            };
+            public struct SAVE_DATA
+            {
+                [MarshalAs(UnmanagedType.LPWStr)]
+                public string lpStr;
+                public MACH_STATE mach_state;
+                public unsafe int* memory_state;
+                public uint memory_size;
+            };
+        }
+        class SaveLoad
+        {
+            [DllImport("SaveLoad.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+            public static extern unsafe bool Save(string path, Structs.SAVE_DATA data);
+            [DllImport("SaveLoad.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+            public static extern unsafe Structs.SAVE_DATA Load(string path);
+        }
+        class MachMem
+        {
+            [DllImport("MachMem.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern unsafe void* Init(uint size);
+            [DllImport("MachMem.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern unsafe bool GetData(void* memory, uint id_cell, int* data);
+            [DllImport("MachMem.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern unsafe bool SetData(void* memory, uint id_cell, int data);
+            [DllImport("MachMem.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern unsafe bool InitProgram(void* memory, void* mach_source);
+            [DllImport("MachMem.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern unsafe void DeleteMemory(void* memory);
+        }
+        class MachCore
+        {
+            [DllImport("MachCore.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern unsafe Structs.MACH_STATE Tick(void* mach);
+            [DllImport("MachCore.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern unsafe void Reset(void* mach);
+            [DllImport("MachCore.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern unsafe void* Init(void* memory);
+            [DllImport("MachCore.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern unsafe void DeleteMach(void* mach);
+            [DllImport("MachCore.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern unsafe bool SetRegData(void* mach, uint reg_id, int data);
+            [DllImport("MachCore.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern unsafe void SetCommandNumber(void* mach, uint number);
+            [DllImport("MachCore.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern unsafe bool SetInput(void* mach, int data);
+            [DllImport("MachCore.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern unsafe bool SetAcum(void* mach, int data);
+        }
+        class Compiler
+        {
+            [DllImport("Compiler.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+            public static extern unsafe void* Compile(string source, int* error_line);
+            [DllImport("Compiler.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+            public static extern unsafe System.IntPtr GetCommadList(void* mach_source);
+            [DllImport("Compiler.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern unsafe void DeleteMachSource(void* mach_source);
+        }
     }
 }
 
