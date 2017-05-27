@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include "ComSpecific.h"
 
-typedef bool(*_GetDataMemory) (void * memory, unsigned id_cell, int * data);
+typedef int(*_GetDataMemory) (void * memory, unsigned id_cell);
 typedef bool(*_SetDataMemory) (void * memory, unsigned id_cell, int data);
 class MACH_CORE
 {

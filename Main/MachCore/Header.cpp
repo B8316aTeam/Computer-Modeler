@@ -1,18 +1,10 @@
 #include "Header.h"
 #include "MachCoreClass.h"
 
-MACH_STATE Tick(void * mach)
+bool Tick(void * mach)
 {
 	MACH_CORE * core = (MACH_CORE*)mach;
-	MACH_STATE out;
-	out.is_end_work = core->Tick();
-	out.accum = core->GetAccum();
-	out.com_counter = core->GetComCount();
-	out.full_reg = core->GetInputReg();
-	out.memory = core->GetMemory();
-	for (short unsigned i = 0; i < 8; i++)
-		out.registers[i] = core->GetRegData(i);
-	return out;
+	return core->Tick();
 }
 
 void Reset(void * mach)
@@ -67,4 +59,67 @@ bool SetAcum(void * mach, int data)
 	}
 	
 	return true;
+}
+
+int GetAcum(void * mach)
+{
+	return ((MACH_CORE *)mach)->GetAccum();
+}
+
+unsigned GetCommandNumber(void * mach)
+{
+	return ((MACH_CORE *)mach)->GetComCount();
+}
+
+int GetRegData(void * mach, unsigned int reg_id)
+{
+	return ((MACH_CORE *)mach)->GetRegData(reg_id);
+}
+
+int GetInput(void * mach)
+{
+	return ((MACH_CORE *)mach)->GetInputReg();
+}
+
+bool GetFullReg(void * mach)
+{
+	return ((MACH_CORE *)mach)->GetFullState();
+}
+
+void * GetMachSate(void * mach)
+{
+	MACH_STATE * mach_state_ = new MACH_STATE;
+	MACH_CORE * mach_core_ = (MACH_CORE *)mach;
+	mach_state_->accum = mach_core_->GetAccum();
+	mach_state_->com_counter = mach_core_->GetComCount();
+	mach_state_->full_reg = mach_core_->GetFullState();
+	mach_state_->input_reg = mach_core_->GetInputReg();
+	for (unsigned i = 0; i < 8; i++)
+		mach_state_->registers[i] = mach_core_->GetRegData(i);
+	return (void*)mach_state_;
+}
+
+void DeleteMachState(void * mach_state)
+{
+	MACH_STATE * mach_state_ = (MACH_STATE *)mach_state;
+	delete mach_state_;
+}
+
+void NewMemory(void * mach, void * memory)
+{
+	((MACH_CORE *)mach)->SetNewMemory(memory);
+}
+
+void SetMachState(void * mach, void * mach_state)
+{
+	MACH_STATE * mach_state_ = (MACH_STATE *)mach_state;
+	MACH_CORE * mach_core_ = (MACH_CORE *)mach;
+	mach_core_->SetAccum(mach_state_->accum);
+	mach_core_->SetComcount(mach_state_->com_counter);
+	mach_core_->SetFullState(mach_state_->full_reg);
+	mach_core_->SetInputReg(mach_state_->input_reg);
+	for (unsigned i = 0; i < 8; i++)
+	{
+		mach_core_->SetRegData(i, mach_state_->registers[i]);
+	}
 }

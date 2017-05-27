@@ -9,21 +9,18 @@ bool Save(wchar_t * path, SAVE_DATA data)
 	while (data.sorce_code[size_sourse_code] != L'\0')
 		size_sourse_code++;
 	size_sourse_code++;
-	//ïîäñ÷¸ò ðàçìåðà sorse_code è ñ÷èòûâàíèå ðàçìåðà â ôàéë è ñàìî ñëîâî
 	fout.write((char*)&size_sourse_code, sizeof size_sourse_code);
 	fout.write((char*)data.sorce_code, sizeof(wchar_t)*size_sourse_code);
-	//111111111111111111111111111111111111
-	//ðåãèñòð
-	fout.write((char*)data.mach_state.registers, sizeof (int) * 8);
-	//2222222222222222222222222222222222222222
-	fout.write((char*)&data.mach_state.accum, sizeof data.mach_state.accum);
-	fout.write((char*)&data.mach_state.com_counter, sizeof data.mach_state.com_counter);
-	fout.write((char*)&data.mach_state.input_reg, sizeof data.mach_state.input_reg);
-	fout.write((char*)&data.mach_state.is_end_work, sizeof data.mach_state.is_end_work);
-	fout.write((char*)&data.memory_size, sizeof data.memory_size);
-	fout.write((char*)data.memory_state, sizeof(int) * data.memory_size);
+	MACH_STATE * mach_state = (MACH_STATE *)data.mach_state;
+	fout.write((char*)mach_state->registers, sizeof (int) * 8);
+	fout.write((char*)&mach_state->accum, sizeof mach_state->accum);
+	fout.write((char*)&mach_state->com_counter, sizeof mach_state->com_counter);
+	fout.write((char*)&mach_state->input_reg, sizeof mach_state->input_reg);
+	fout.write((char*)&mach_state->full_reg, sizeof mach_state->full_reg);
+	MEMORY * memory = (MEMORY *)data.memory;
+	fout.write((char*)&memory->size, sizeof(unsigned));
+	fout.write((char*)memory->mem_, sizeof(int) *((MEMORY *)data.memory)->size);
 	fout.close();
-	system("pause");
 	return 0;
 }
 
@@ -31,23 +28,23 @@ SAVE_DATA Load(wchar_t * path)
 {
 	SAVE_DATA data;
 	ifstream fin(path, ios::in | ios::binary);
-	//ñ÷èòûâàåò èç ôàéëà çíà÷åíèå ðàçìåðà sorce_code
 	int size_sorse_code = 0;
 	fin.read((char*)&size_sorse_code, sizeof size_sorse_code);
 	data.sorce_code = new wchar_t[size_sorse_code];
 	fin.read((char*)data.sorce_code, sizeof(wchar_t)*size_sorse_code);
-	//1111111111111111111111111
-	fin.read((char*)data.mach_state.registers, sizeof (int) * 8);
-	//2222222222222222222222222
-	fin.read((char*)&data.mach_state.accum, sizeof data.mach_state.accum);
-	fin.read((char*)&data.mach_state.com_counter, sizeof data.mach_state.com_counter);
-	fin.read((char*)&data.mach_state.input_reg, sizeof data.mach_state.input_reg);
-	fin.read((char*)&data.mach_state.is_end_work, sizeof data.mach_state.is_end_work);
-	fin.read((char*)&data.memory_size, sizeof data.memory_size);
-	data.memory_state = new int[data.memory_size];
-	fin.read((char*)data.memory_state, sizeof(int) * data.memory_size);
-	
+	//mach state
+	MACH_STATE * mach_state = new MACH_STATE;
+	fin.read((char*)mach_state->registers, sizeof (int) * 8);
+	fin.read((char*)&mach_state->accum, sizeof mach_state->accum);
+	fin.read((char*)&mach_state->com_counter, sizeof mach_state->com_counter);
+	fin.read((char*)&mach_state->input_reg, sizeof mach_state->input_reg);
+	fin.read((char*)&mach_state->full_reg, sizeof mach_state->full_reg);
+	data.mach_state = (void *)mach_state;
+	//mach memory
+	data.memory = (void *) new MEMORY;
+	fin.read((char*)&((MEMORY *)data.memory)->size, sizeof(unsigned));
+	((MEMORY *)data.memory)->mem_ = new int[((MEMORY *)data.memory)->size];
+	fin.read((char*)((MEMORY *)data.memory)->mem_, sizeof(int) *((MEMORY *)data.memory)->size);
 	fin.close();
-	system("pause");
 	return data;
 }

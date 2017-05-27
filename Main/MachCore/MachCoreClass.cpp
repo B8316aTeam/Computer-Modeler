@@ -13,28 +13,35 @@ int MACH_CORE::GetData(ADRESS_TYPE adress_type,SIGN_TYPE sign, int data)
 			return 0;
 		}
 		else
-			return registers_[data];
+			return OutView(registers_[data]);
 	}
 	case none:
 	{
-		int out = 0;
-		if (GetDataMemory(memory_, data, &out))
+		try
+		{
+			return OutView(data|sign);
+		}
+		catch (unsigned size)
 		{
 			MessageBox(NULL, L"Out of memory", CORE_ERROR, NULL);
 			is_error = true;
 		}
-		return out;
+		return 0;
 	}
 	case sob:
 	{
 		int out = 0;
 		if (sign == pos)
 		{
-			
-			if (GetDataMemory(memory_, data, &out))
+			try
+			{
+				out = GetDataMemory(memory_, data);
+			}
+			catch (unsigned size)
 			{
 				MessageBox(NULL, L"Out of memory", CORE_ERROR, NULL);
 				is_error = true;
+				return 0;
 			}
 		}
 		else
@@ -55,7 +62,11 @@ int MACH_CORE::GetData(ADRESS_TYPE adress_type,SIGN_TYPE sign, int data)
 		if (sign == pos)
 		{
 
-			if (GetDataMemory(memory_, data, &out))
+			try
+			{
+				out = GetDataMemory(memory_, data);
+			}
+			catch (unsigned size)
 			{
 				MessageBox(NULL, L"Out of memory", CORE_ERROR, NULL);
 				is_error = true;
@@ -108,22 +119,26 @@ void MACH_CORE::SetData(ADRESS_TYPE adress_type, SIGN_TYPE sign, int data)
 		int out = 0;
 		if (sign == pos)
 		{
-
-			if (SetDataMemory(memory_, data, accum_))
+			try
+			{
+				out = GetDataMemory(memory_, data);
+			}
+			catch (int id)
 			{
 				MessageBox(NULL, L"Out of memory", CORE_ERROR, NULL);
 				is_error = true;
+				return;
 			}
 		}
 		else
 		{
-			if (data >= 8)
+			if (data > 7)
 			{
-				MessageBox(NULL, L"Out of registers", CORE_ERROR, NULL);
+				MessageBox(NULL, L"Out of memory", CORE_ERROR, NULL);
 				is_error = true;
+				return;
 			}
-			else
-				out = registers_[data];
+			out = registers_[data];
 		}
 		SetData(none, pos, out);
 		break;
@@ -133,22 +148,11 @@ void MACH_CORE::SetData(ADRESS_TYPE adress_type, SIGN_TYPE sign, int data)
 		int out = 0;
 		if (sign == pos)
 		{
-
-			if (GetDataMemory(memory_, data, &out))
-			{
-				MessageBox(NULL, L"Out of memory", CORE_ERROR, NULL);
-				is_error = true;
-			}
+			out = GetData(none, pos, data);
 		}
 		else
 		{
-			if (data >= 8)
-			{
-				MessageBox(NULL, L"Out of registers", CORE_ERROR, NULL);
-				is_error = true;
-			}
-			else
-				out = registers_[data];
+			out = GetData(reg, pos, data);
 		}
 		SetData(sob, pos, out);
 		break;
@@ -161,7 +165,7 @@ void MACH_CORE::SetData(ADRESS_TYPE adress_type, SIGN_TYPE sign, int data)
 int MACH_CORE::OutView(int number)
 {
 	int out = number;
-	if ((out >> 24) != 0)
+	if ((out >> 24) == 0)
 		return out;
 	else
 	{
@@ -183,7 +187,7 @@ int MACH_CORE::InView(int number)
 MACH_CORE::MACH_CORE(void * memory)
 {
 	h = LoadLibrary(L"MachMem.dll");
-	GetDataMemory = reinterpret_cast<bool(*)(void * memory, unsigned id_cell, int * data)>(GetProcAddress(h, "GetData"));
+	GetDataMemory = reinterpret_cast<int(*)(void * memory, unsigned id_cell)>(GetProcAddress(h, "GetData"));
 	SetDataMemory = reinterpret_cast<bool(*)(void * memory, unsigned id_cell, int data)>(GetProcAddress(h, "SetData"));
 	memory_ = memory;
 	accum_ = 0;
@@ -264,10 +268,14 @@ void MACH_CORE::SetComcount(unsigned data)
 
 bool MACH_CORE::Tick()
 {
-	int command = 0; 
-	if (GetDataMemory(memory_, com_counter_, &command))
+	int command = 0;
+	try
 	{
-		MessageBox(NULL, L"End of memory", CORE_ERROR, NULL);
+		command = GetDataMemory(memory_,com_counter_);
+	}
+	catch (unsigned size)
+	{
+		MessageBox(NULL, L"Out of memory", CORE_ERROR, NULL);
 		is_error = true;
 	}
 	if (!is_error)
@@ -282,7 +290,7 @@ bool MACH_CORE::Tick()
 		case add:
 		{
 			int x1 = OutView(accum_),
-				x2 = OutView(GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER));
+				x2 = GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER);
 			x1 += x2;
 			if ((x1 < (MAX_NUMBER *-1)) || (x1 > MAX_NUMBER))
 				full_reg_ = 1;
@@ -295,7 +303,7 @@ bool MACH_CORE::Tick()
 		case sub:
 		{
 			int x1 = OutView(accum_),
-				x2 = OutView(GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER));
+				x2 = GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER);
 			x1 -= x2;
 			if ((x1 < (MAX_NUMBER *-1)) || (x1 > MAX_NUMBER))
 				full_reg_ = 1;
@@ -308,7 +316,7 @@ bool MACH_CORE::Tick()
 		case ndiv:
 		{
 			int x1 = OutView(accum_),
-				x2 = OutView(GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER));
+				x2 = GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER);
 			accum_ = InView(x1 / x2);
 			com_counter_++;
 			break;
@@ -316,7 +324,7 @@ bool MACH_CORE::Tick()
 		case mul:
 		{
 			int x1 = OutView(accum_),
-				x2 = OutView(GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER));
+				x2 = GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER);
 			x1 -= x2;
 			if ((x1 < (MAX_NUMBER *-1)) || (x1 > MAX_NUMBER))
 				full_reg_ = 1;
@@ -329,14 +337,14 @@ bool MACH_CORE::Tick()
 		case mod:
 		{
 			int x1 = OutView(accum_),
-				x2 = OutView(GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER));
+				x2 = GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER);
 			accum_ = InView(x1 % x2);
 			com_counter_++;
 			break;
 		}
 		case jmp:
 		{
-			int tmp =  OutView(GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER));
+			int tmp = GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER);
 			if (tmp < 0)
 			{
 				MessageBox(NULL, L"Error command number", CORE_ERROR, NULL);
@@ -350,7 +358,7 @@ bool MACH_CORE::Tick()
 		{
 			if (OutView(accum_) == 0)
 			{
-				int tmp = OutView(GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER));
+				int tmp = GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER);
 				if (tmp < 0)
 				{
 					MessageBox(NULL, L"Error command number", CORE_ERROR, NULL);
@@ -367,7 +375,7 @@ bool MACH_CORE::Tick()
 		{
 			if (OutView(accum_) != 0)
 			{
-				int tmp = OutView(GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER));
+				int tmp = GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER);
 				if (tmp < 0)
 				{
 					MessageBox(NULL, L"Error command number", CORE_ERROR, NULL);
@@ -384,7 +392,7 @@ bool MACH_CORE::Tick()
 		{
 			if (OutView(accum_) < 0)
 			{
-				int tmp = OutView(GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER));
+				int tmp = GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER);
 				if (tmp < 0)
 				{
 					MessageBox(NULL, L"Error command number", CORE_ERROR, NULL);
@@ -401,7 +409,7 @@ bool MACH_CORE::Tick()
 		{
 			if (OutView(accum_) > 0)
 			{
-				int tmp = OutView(GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER));
+				int tmp = GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER);
 				if (tmp < 0)
 				{
 					MessageBox(NULL, L"Error command number", CORE_ERROR, NULL);

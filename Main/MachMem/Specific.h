@@ -2,8 +2,9 @@
 #include <Windows.h>
 struct MEMORY
 {
-	int * mem_;
-	unsigned size;
+	int * mem_ = 0;
+	unsigned size = 0;
+	unsigned last_change_ = 0;
 };
 struct MACH_SOURCE
 {

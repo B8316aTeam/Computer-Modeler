@@ -1,5 +1,5 @@
 ﻿#pragma once
-#define MAX_NUMBER 8388608
+#define MAX_NUMBER 8388607
 enum COMMAND
 {
 	htl = 0x00000000,
