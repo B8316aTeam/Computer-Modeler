@@ -262,15 +262,16 @@ unsigned CompileMachSource(vector<RAW_COM> commands, void ** mach_source)
 		}
 		bool is_error = false;
 		bool is_reg = false;
+		commands_list += curr_raw_command->command_[0];
+		commands_list += L"\t";
+
 		if (curr_raw_command->command_[1] != L"cp")
 		{
-			commands_list += curr_raw_command->command_[0];
-			commands_list += L"\t";
+			out->commands_[command_id-1] = StringToNumber(curr_raw_command->command_.back(), &is_error, &is_reg);
 			commands_list += curr_raw_command->command_[1];
 			commands_list += L"\t";
 			commands_list += curr_raw_command->command_[2];
 			commands_list += L"\n";
-			out->commands_[command_id-1] = StringToNumber(curr_raw_command->command_.back(), &is_error, &is_reg);
 			if (is_error)
 			{
 				MessageBox(NULL, ERROR_MESSAGE(L"Ошибка при определении числа ", curr_raw_command->command_.back()), ERROR_CAP, NULL);
@@ -287,7 +288,6 @@ unsigned CompileMachSource(vector<RAW_COM> commands, void ** mach_source)
 					out->commands_[command_id - 1] |= ADRESS_TYPE::hash;
 				if (curr_raw_command->command_[1] == L"@")
 					out->commands_[command_id - 1] |= ADRESS_TYPE::sob;
-				commands_list += curr_raw_command->command_[1];
 			}
 			if (curr_raw_command->command_[0] == L"add")
 			{
@@ -359,6 +359,10 @@ unsigned CompileMachSource(vector<RAW_COM> commands, void ** mach_source)
 					if (curr_contr_point->name == curr_raw_command->command_[2])
 					{
 						out->commands_[command_id-1] = curr_contr_point->target_line;
+						commands_list += L"none";
+						commands_list += L"\t";
+						commands_list += std::to_wstring(curr_contr_point->target_line);
+						commands_list += L"\n";
 						is_search = true;
 					}
 				}

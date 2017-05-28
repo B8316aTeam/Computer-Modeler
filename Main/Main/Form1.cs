@@ -34,14 +34,39 @@ namespace Main
             }
             if (error_line == 0)
             {
-                source_code = code_block.Text;
+                last_select_line = 0;
+                SaveSaveFile("LastSession.CMsave");
                 unsafe
                 {
-                    code_block.Text = Marshal.PtrToStringUni(CompModelEx.Compiler.GetCommadList(mach_source));
+                    commands_list.Rows.Clear();
+                    string raw_cm_list = Marshal.PtrToStringUni(CompModelEx.Compiler.GetCommadList(mach_source));
+                    int chek = 0, line_id = 0;
+                    string[] com_l = new string[3];
+                    for (int i = 0; i < raw_cm_list.Length ; i++)
+                    {
+                        if (raw_cm_list[i] == '\t')
+                        {
+                            chek = (chek + 1) % 3;
+                            continue;
+                        }
+                        if (raw_cm_list[i] == '\n')
+                        {
+                            chek = 0;
+                            commands_list.Rows.Add(com_l);
+                            commands_list.Rows[line_id].HeaderCell.Value = Convert.ToString(line_id);
+                            line_id++;
+                            com_l = new string[3];
+                            continue;
+                        }
+                        com_l[chek] += raw_cm_list[i];
+                    }
                     CompModelEx.MachMem.InitProgram(mach_mem, mach_source);
+                    unsafe
+                    {
+                        start_state = CompModelEx.MachCore.GetMachSate(mach_core);
+                    }
                     UpdateMemory(true);
                 }
-                code_block.ReadOnly = true;
                 this.label9.Visible = true;
                 this.label11.Visible = true;
                 this.res_start_state.Visible = true;
@@ -51,6 +76,9 @@ namespace Main
                 this.button1.Visible = false;
                 this.button2.Visible = false;
                 this.button3.Visible = false;
+                this.button9.Visible = false;
+                this.code_block.Visible = false;
+                this.commands_list.Visible = true;
             }
             else
             {
@@ -64,7 +92,12 @@ namespace Main
 
         private void button4_Click(object sender, EventArgs e)
         {
-            code_block.Text = source_code;
+            LoadSaveFile("LastSession.CMsave");
+            unsafe
+            {
+                CompModelEx.MachCore.DeleteMachState(start_state);
+            }
+            this.button9.Visible = true;
             this.button4.Visible = false;
             this.button5.Visible = false;
             this.button6.Visible = false;
@@ -72,6 +105,8 @@ namespace Main
             this.button2.Visible = true;
             this.button3.Visible = true;
             this.res_start_state.Visible = false;
+            this.code_block.Visible = true;
+            this.commands_list.Visible = false;
         }
 
         private void code_block_KeyPress(object sender, KeyPressEventArgs e)
@@ -90,18 +125,10 @@ namespace Main
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CompModelEx.Structs.SAVE_DATA save_data = new CompModelEx.Structs.SAVE_DATA();
+
             if (save_file_dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-               
-                unsafe
-                {
-                    save_data.source_code = Marshal.StringToHGlobalUni(code_block.Text);
-                    save_data.mach_state = CompModelEx.MachCore.GetMachSate(mach_core);
-                    save_data.memory_ = mach_mem;
-                    CompModelEx.SaveLoad.Save(save_file_dialog.FileName, save_data);
-                    CompModelEx.MachCore.DeleteMachState(save_data.mach_state);
-                }
+                SaveSaveFile(save_file_dialog.FileName);
             }
         }
 
@@ -112,12 +139,8 @@ namespace Main
                 int number = InputData(combo_box_data_type_processor, textbox_input_reg);
                 unsafe
                 {
-                    if (CompModelEx.MachCore.SetInput(mach_core, number))
-                    {
-                        MessageBox.Show("Превышено максимальное значение");
-                        is_env_change = false;
-                        textbox_input_reg.Text = Convert.ToString(CompModelEx.MachCore.GetInput(mach_core),10);
-                    }
+                    CompModelEx.MachCore.SetInput(mach_core, number);
+                    textbox_input_reg.Text = Convert.ToString(CompModelEx.MachCore.GetInput(mach_core), processor_osn);
                 }
             }
             catch (InvalidOperationException err)
@@ -141,6 +164,8 @@ namespace Main
                     memory_table.Rows[i].HeaderCell.Value = Convert.ToString(i * 10);
                 }
                 UpdateMemory(true);
+                if (System.IO.File.Exists("LastSession.CMsave"))
+                    LoadSaveFile("LastSession.CMsave");
             }
             
         }
@@ -171,12 +196,8 @@ namespace Main
                 int number = InputData(combo_box_data_type_processor, textbox_accum);
                 unsafe
                 {
-                    if (CompModelEx.MachCore.SetAcum(mach_core, number))
-                    {
-                        MessageBox.Show("Превышено максимальное значение");
-                        is_env_change = false;
-                        textbox_accum.Text = Convert.ToString(0, 10);
-                    }
+                    CompModelEx.MachCore.SetAcum(mach_core, number);
+                    textbox_accum.Text = Convert.ToString(CompModelEx.MachCore.GetAcum(mach_core), processor_osn);
                 }
             }
             catch (InvalidOperationException err)
@@ -191,12 +212,8 @@ namespace Main
             {
                 unsafe
                 {
-                    if (CompModelEx.MachCore.SetRegData(mach_core,0, InputData(combo_box_data_type_processor, textbox_reg0)))
-                    {
-                        MessageBox.Show("Превышено максимальное значение");
-                        is_env_change = false;
-                        textbox_reg0.Text = Convert.ToString(0, 10);
-                    }
+                    CompModelEx.MachCore.SetRegData(mach_core, 0, InputData(combo_box_data_type_processor, textbox_reg0));
+                    textbox_reg0.Text = Convert.ToString(CompModelEx.MachCore.GetRegData(mach_core,0), processor_osn);
                 }
             }
             catch (InvalidOperationException err)
@@ -211,12 +228,8 @@ namespace Main
             {
                 unsafe
                 {
-                    if (CompModelEx.MachCore.SetRegData(mach_core, 1, InputData(combo_box_data_type_processor, textbox_reg1)))
-                    {
-                        MessageBox.Show("Превышено максимальное значение");
-                        is_env_change = false;
-                        textbox_reg1.Text = Convert.ToString(0, 10);
-                    }
+                    CompModelEx.MachCore.SetRegData(mach_core, 1, InputData(combo_box_data_type_processor, textbox_reg1));
+                    textbox_reg1.Text = Convert.ToString(CompModelEx.MachCore.GetRegData(mach_core, 1), processor_osn);
                 }
             }
             catch (InvalidOperationException err)
@@ -231,12 +244,8 @@ namespace Main
             {
                 unsafe
                 {
-                    if (CompModelEx.MachCore.SetRegData(mach_core, 2, InputData(combo_box_data_type_processor, textbox_reg2)))
-                    {
-                        MessageBox.Show("Превышено максимальное значение");
-                        is_env_change = false;
-                        textbox_reg2.Text = Convert.ToString(0, 10);
-                    }
+                    CompModelEx.MachCore.SetRegData(mach_core, 2, InputData(combo_box_data_type_processor, textbox_reg2));
+                    textbox_reg2.Text = Convert.ToString(CompModelEx.MachCore.GetRegData(mach_core, 2), processor_osn);
                 }
             }
             catch (InvalidOperationException err)
@@ -251,12 +260,8 @@ namespace Main
             {
                 unsafe
                 {
-                    if (CompModelEx.MachCore.SetRegData(mach_core, 3, InputData(combo_box_data_type_processor, textbox_reg3)))
-                    {
-                        MessageBox.Show("Превышено максимальное значение");
-                        is_env_change = false;
-                        textbox_reg3.Text = Convert.ToString(0, 10);
-                    }
+                    CompModelEx.MachCore.SetRegData(mach_core, 3, InputData(combo_box_data_type_processor, textbox_reg3));
+                    textbox_reg3.Text = Convert.ToString(CompModelEx.MachCore.GetRegData(mach_core, 3), processor_osn);
                 }
             }
             catch (InvalidOperationException err)
@@ -271,12 +276,8 @@ namespace Main
             {
                 unsafe
                 {
-                    if (CompModelEx.MachCore.SetRegData(mach_core, 4, InputData(combo_box_data_type_processor, textbox_4)))
-                    {
-                        MessageBox.Show("Превышено максимальное значение");
-                        is_env_change = false;
-                        textbox_4.Text = Convert.ToString(0, 10);
-                    }
+                    CompModelEx.MachCore.SetRegData(mach_core, 4, InputData(combo_box_data_type_processor, textbox_4));
+                    textbox_4.Text = Convert.ToString(CompModelEx.MachCore.GetRegData(mach_core, 4), processor_osn);
                 }
             }
             catch (InvalidOperationException err)
@@ -291,12 +292,8 @@ namespace Main
             {
                 unsafe
                 {
-                    if (CompModelEx.MachCore.SetRegData(mach_core, 5, InputData(combo_box_data_type_processor, textbox_reg5)))
-                    {
-                        MessageBox.Show("Превышено максимальное значение");
-                        is_env_change = false;
-                        textbox_reg5.Text = Convert.ToString(0, 10);
-                    }
+                    CompModelEx.MachCore.SetRegData(mach_core, 5, InputData(combo_box_data_type_processor, textbox_reg5));
+                    textbox_reg5.Text = Convert.ToString(CompModelEx.MachCore.GetRegData(mach_core, 5), processor_osn);
                 }
             }
             catch (InvalidOperationException err)
@@ -311,12 +308,8 @@ namespace Main
             {
                 unsafe
                 {
-                    if (CompModelEx.MachCore.SetRegData(mach_core, 6, InputData(combo_box_data_type_processor, textbox_reg6)))
-                    {
-                        MessageBox.Show("Превышено максимальное значение");
-                        is_env_change = false;
-                        textbox_reg6.Text = Convert.ToString(0, 10);
-                    }
+                    CompModelEx.MachCore.SetRegData(mach_core, 6, InputData(combo_box_data_type_processor, textbox_reg6));
+                    textbox_reg6.Text = Convert.ToString(CompModelEx.MachCore.GetRegData(mach_core, 6), processor_osn);
                 }
             }
             catch (InvalidOperationException err)
@@ -331,12 +324,8 @@ namespace Main
             {
                 unsafe
                 {
-                    if (CompModelEx.MachCore.SetRegData(mach_core, 7, InputData(combo_box_data_type_processor, textbox_reg7)))
-                    {
-                        MessageBox.Show("Превышено максимальное значение");
-                        is_env_change = false;
-                        textbox_reg7.Text = Convert.ToString(0, 10);
-                    }
+                    CompModelEx.MachCore.SetRegData(mach_core, 7, InputData(combo_box_data_type_processor, textbox_reg7));
+                    textbox_reg7.Text = Convert.ToString(CompModelEx.MachCore.GetRegData(mach_core, 7), processor_osn);
                 }
             }
             catch (InvalidOperationException err)
@@ -443,41 +432,98 @@ namespace Main
 
         private void button2_Click(object sender, EventArgs e)
         {
-            unsafe
+            if (open_file_dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                open_file_dialog.ShowDialog();
-                CompModelEx.Structs.SAVE_DATA tmp = CompModelEx.SaveLoad.Load(open_file_dialog.FileName);
-                // load core state
-                CompModelEx.MachCore.SetMachState(mach_core, tmp.mach_state);
-                CompModelEx.MachCore.DeleteMachState(tmp.mach_state);
-                // load memry
-                CompModelEx.MachMem.DeleteMemory(mach_mem);
-                mach_mem = tmp.memory_;
-                CompModelEx.MachCore.NewMemory(mach_core, mach_mem);
-                // load source code
-                code_block.Text = Marshal.PtrToStringUni(tmp.source_code);
-                UpdateMemory(true);
-                UpdateCoreState();
+                LoadSaveFile(open_file_dialog.FileName);
             }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            uint now_com = 1;
+            OneTick();
+        }
+
+        private void save_file_dialog_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void open_file_dialog_FileOk(object sender, CancelEventArgs e)
+        {
+            LoadSaveFile(open_file_dialog.FileName);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveSaveFile("LastSession.CMsave");
+        }
+
+        private void res_start_state_Click(object sender, EventArgs e)
+        {
             unsafe
             {
-                CompModelEx.MachCore.Tick(mach_core);
-                now_com = CompModelEx.MachCore.GetCommandNumber(mach_core)+1;
+                CompModelEx.MachCore.SetMachState(mach_core, start_state);
+                UpdateCoreState();
             }
-            for (uint i = 0; i < now_com - 1; i++)
-                select_start += code_block.Lines[i].Length;
-            select_end = code_block.Lines[now_com - 1].Length + 1;
-            code_block.Select(select_start, select_end);
-            code_block.SelectionColor = Color.Red;
-            UpdateCoreState();
-            UpdateMemory(false);
-            
-            
+        }
+
+        private void reset_Click(object sender, EventArgs e)
+        {
+            unsafe
+            {
+                CompModelEx.MachCore.DeleteMach(mach_core);
+                mach_core = CompModelEx.MachCore.Init(mach_mem);
+                UpdateCoreState();
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            unsafe
+            {
+                CompModelEx.MachMem.DeleteMemory(mach_mem);
+                mach_mem = CompModelEx.MachMem.Init(1000);
+                CompModelEx.MachCore.NewMemory(mach_core,mach_mem);
+                UpdateMemory(true);
+            }
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            unsafe
+            {
+                button1_Click(1, EventArgs.Empty);
+                CompModelEx.MachMem.DeleteMemory(mach_mem);
+                CompModelEx.MachCore.DeleteMach(mach_core);
+                mach_mem = CompModelEx.MachMem.Init(1000);
+                mach_core = CompModelEx.MachCore.Init(mach_mem);
+                UpdateCoreState();
+                UpdateMemory(true);
+                code_block.Text = "";
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            OneTick();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            timer1.Interval = trackBar1.Value;
+            timer1.Start();
+            button4.Visible = false;
+            button5.Visible = false;
+            button10.Visible = true;
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            button4.Visible = true;
+            button5.Visible = true;
+            button10.Visible = false;
         }
     }
 

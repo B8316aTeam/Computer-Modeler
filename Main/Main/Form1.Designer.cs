@@ -23,6 +23,62 @@ namespace Main
             }
             base.Dispose(disposing);
         }
+        unsafe void OneTick()
+        {
+            uint now_com = 0;
+            unsafe
+            {
+                try
+                {
+                    CompModelEx.MachCore.Tick(mach_core);
+                }
+                catch (SEHException err)
+                {
+                    button10_Click(1, EventArgs.Empty);
+                }
+                now_com = CompModelEx.MachCore.GetCommandNumber(mach_core);
+            }
+            try
+            {
+                commands_list.Rows[last_select_line].DefaultCellStyle.BackColor = System.Drawing.Color.White;
+                last_select_line = Convert.ToInt32(now_com);
+                commands_list.Rows[last_select_line].DefaultCellStyle.BackColor = System.Drawing.Color.Green;
+            }
+            catch (ArgumentOutOfRangeException err)
+            {
+
+            }
+            UpdateCoreState();
+            UpdateMemory(false);
+            
+        }
+        unsafe void LoadSaveFile(string path)
+        {
+            CompModelEx.Structs.SAVE_DATA tmp = CompModelEx.SaveLoad.Load(path);
+            // load core state
+            CompModelEx.MachCore.SetMachState(mach_core, tmp.mach_state);
+            CompModelEx.MachCore.DeleteMachState(tmp.mach_state);
+            // load memry
+            CompModelEx.MachMem.DeleteMemory(mach_mem);
+            mach_mem = tmp.memory_;
+            CompModelEx.MachCore.NewMemory(mach_core, mach_mem);
+            // load source code
+            code_block.Text = Marshal.PtrToStringUni(tmp.source_code);
+            UpdateMemory(true);
+            UpdateCoreState();
+        }
+        unsafe void SaveSaveFile(string path)
+        {
+            CompModelEx.Structs.SAVE_DATA save_data = new CompModelEx.Structs.SAVE_DATA();
+            unsafe
+            {
+                save_data.source_code = Marshal.StringToHGlobalUni(code_block.Text);
+                save_data.mach_state = CompModelEx.MachCore.GetMachSate(mach_core);
+                save_data.memory_ = mach_mem;
+                CompModelEx.SaveLoad.Save(path, save_data);
+                CompModelEx.MachCore.DeleteMachState(save_data.mach_state);
+            }
+        }
         unsafe int InputData(System.Windows.Forms.ComboBox combo_box, System.Windows.Forms.TextBox text_box)
         {
             int osn;
@@ -67,8 +123,11 @@ namespace Main
                 int car_pos = textbox_input_reg.SelectionStart;
                 try
                 {
-                    text_box.Text = text_box.Text.Replace(text_box.Text[text_box.TextLength - 1], '0');
-                    text_box.SelectionStart = car_pos;
+                    if (!((textbox_input_reg.Text == "-") && (osn == 10)))
+                    {
+                        text_box.Text = text_box.Text.Replace(text_box.Text[text_box.TextLength - 1], '0');
+                        text_box.SelectionStart = car_pos;
+                    }
                 }
                 catch (IndexOutOfRangeException err)
                 {
@@ -220,6 +279,7 @@ namespace Main
             }
             unsafe
             {
+                processor_osn = osn;
                 is_env_change = false;
                 textbox_accum.Text = Convert.ToString(CompModelEx.MachCore.GetAcum(mach_core), osn);
 
@@ -265,6 +325,7 @@ namespace Main
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.open_file_dialog = new System.Windows.Forms.OpenFileDialog();
             this.save_file_dialog = new System.Windows.Forms.SaveFileDialog();
             this.button1 = new System.Windows.Forms.Button();
@@ -313,6 +374,7 @@ namespace Main
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button8 = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -327,21 +389,36 @@ namespace Main
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.commands_list = new System.Windows.Forms.DataGridView();
+            this.cl_command = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cl_adress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cl_data = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.memory_table)).BeginInit();
             this.Панель.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.commands_list)).BeginInit();
             this.SuspendLayout();
             // 
             // open_file_dialog
             // 
             this.open_file_dialog.DefaultExt = "CMsave";
             this.open_file_dialog.Filter = "Файл сохранения (*.CMsave)|*.CMsave";
+            this.open_file_dialog.FileOk += new System.ComponentModel.CancelEventHandler(this.open_file_dialog_FileOk);
             // 
             // save_file_dialog
             // 
             this.save_file_dialog.DefaultExt = "CMsave";
             this.save_file_dialog.Filter = "Файл сохранения (*.CMsave)|*.CMsave";
+            this.save_file_dialog.FileOk += new System.ComponentModel.CancelEventHandler(this.save_file_dialog_FileOk);
             // 
             // button1
             // 
@@ -604,6 +681,7 @@ namespace Main
             this.reset.TabIndex = 26;
             this.reset.Text = "Сброс";
             this.reset.UseVisualStyleBackColor = true;
+            this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
             // label9
             // 
@@ -625,6 +703,7 @@ namespace Main
             this.res_start_state.Text = "Возврат в исх.";
             this.res_start_state.UseVisualStyleBackColor = true;
             this.res_start_state.Visible = false;
+            this.res_start_state.Click += new System.EventHandler(this.res_start_state_Click);
             // 
             // label7
             // 
@@ -804,7 +883,7 @@ namespace Main
             // button2
             // 
             this.button2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button2.Location = new System.Drawing.Point(547, 68);
+            this.button2.Location = new System.Drawing.Point(547, 64);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(223, 37);
             this.button2.TabIndex = 7;
@@ -826,6 +905,7 @@ namespace Main
             // panel2
             // 
             this.panel2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panel2.Controls.Add(this.button8);
             this.panel2.Controls.Add(this.label16);
             this.panel2.Controls.Add(this.label18);
             this.panel2.Controls.Add(this.label15);
@@ -835,10 +915,20 @@ namespace Main
             this.panel2.Controls.Add(this.button7);
             this.panel2.Controls.Add(this.input_memory_data);
             this.panel2.Controls.Add(this.input_memory_cell);
-            this.panel2.Location = new System.Drawing.Point(547, 242);
+            this.panel2.Location = new System.Drawing.Point(547, 260);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(223, 185);
             this.panel2.TabIndex = 9;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(133, 155);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(81, 21);
+            this.button8.TabIndex = 29;
+            this.button8.Text = "Сброс";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // label16
             // 
@@ -903,9 +993,9 @@ namespace Main
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(154, 126);
+            this.button7.Location = new System.Drawing.Point(133, 106);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(60, 35);
+            this.button7.Size = new System.Drawing.Size(81, 21);
             this.button7.TabIndex = 4;
             this.button7.Text = "Ввод";
             this.button7.UseVisualStyleBackColor = true;
@@ -929,6 +1019,7 @@ namespace Main
             // 
             // code_block
             // 
+            this.code_block.AcceptsTab = true;
             this.code_block.Dock = System.Windows.Forms.DockStyle.Left;
             this.code_block.Location = new System.Drawing.Point(3, 16);
             this.code_block.Name = "code_block";
@@ -953,18 +1044,19 @@ namespace Main
             // button5
             // 
             this.button5.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button5.Location = new System.Drawing.Point(547, 68);
+            this.button5.Location = new System.Drawing.Point(547, 64);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(223, 37);
             this.button5.TabIndex = 17;
             this.button5.Text = "непр. выполнение";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Visible = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
             this.button6.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button6.Location = new System.Drawing.Point(547, 107);
+            this.button6.Location = new System.Drawing.Point(547, 106);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(223, 34);
             this.button6.TabIndex = 18;
@@ -975,14 +1067,21 @@ namespace Main
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.label22);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.trackBar1);
+            this.groupBox1.Controls.Add(this.button10);
+            this.groupBox1.Controls.Add(this.button9);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.panel2);
             this.groupBox1.Controls.Add(this.code_block);
             this.groupBox1.Controls.Add(this.Панель);
+            this.groupBox1.Controls.Add(this.commands_list);
             this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
@@ -990,6 +1089,114 @@ namespace Main
             this.groupBox1.Size = new System.Drawing.Size(1134, 448);
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
+            // 
+            // label22
+            // 
+            this.label22.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(745, 241);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(31, 13);
+            this.label22.TabIndex = 25;
+            this.label22.Text = "2000";
+            // 
+            // label12
+            // 
+            this.label12.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(543, 241);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(25, 13);
+            this.label12.TabIndex = 24;
+            this.label12.Text = "100";
+            // 
+            // label10
+            // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(594, 196);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(120, 13);
+            this.label10.TabIndex = 23;
+            this.label10.Text = "Скорость выполнения";
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.trackBar1.LargeChange = 10;
+            this.trackBar1.Location = new System.Drawing.Point(546, 209);
+            this.trackBar1.Maximum = 2000;
+            this.trackBar1.Minimum = 100;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(223, 45);
+            this.trackBar1.TabIndex = 22;
+            this.trackBar1.Value = 100;
+            // 
+            // button10
+            // 
+            this.button10.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.button10.Location = new System.Drawing.Point(547, 64);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(222, 36);
+            this.button10.TabIndex = 21;
+            this.button10.Text = "Стоп";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Visible = false;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button9
+            // 
+            this.button9.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.button9.Location = new System.Drawing.Point(546, 147);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(223, 33);
+            this.button9.TabIndex = 20;
+            this.button9.Text = "Новая эмуляция";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // commands_list
+            // 
+            this.commands_list.AllowUserToAddRows = false;
+            this.commands_list.AllowUserToDeleteRows = false;
+            this.commands_list.AllowUserToResizeRows = false;
+            this.commands_list.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.commands_list.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.commands_list.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.commands_list.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cl_command,
+            this.cl_adress,
+            this.cl_data});
+            this.commands_list.Location = new System.Drawing.Point(5, 16);
+            this.commands_list.Name = "commands_list";
+            this.commands_list.ReadOnly = true;
+            this.commands_list.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.commands_list.ShowEditingIcon = false;
+            this.commands_list.Size = new System.Drawing.Size(519, 426);
+            this.commands_list.TabIndex = 19;
+            this.commands_list.Visible = false;
+            // 
+            // cl_command
+            // 
+            this.cl_command.HeaderText = "Command";
+            this.cl_command.Name = "cl_command";
+            this.cl_command.ReadOnly = true;
+            // 
+            // cl_adress
+            // 
+            this.cl_adress.HeaderText = "Adress type";
+            this.cl_adress.Name = "cl_adress";
+            this.cl_adress.ReadOnly = true;
+            // 
+            // cl_data
+            // 
+            this.cl_data.HeaderText = "Data";
+            this.cl_data.Name = "cl_data";
+            this.cl_data.ReadOnly = true;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -1002,6 +1209,7 @@ namespace Main
             this.Name = "Form1";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.memory_table)).EndInit();
             this.Панель.ResumeLayout(false);
@@ -1009,6 +1217,9 @@ namespace Main
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.commands_list)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1064,12 +1275,12 @@ namespace Main
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox textbox_full_reg;
         private System.Windows.Forms.TextBox textbox_com_counter;
-        private string source_code;
         private unsafe void* mach_source;
         private unsafe void* mach_core;
         private unsafe void* mach_mem;
         private unsafe void* start_state;
-        private unsafe void* start_mem;
+        private int last_select_line = 0;
+        int processor_osn = 10;
         int select_start = 0;
         int select_end = 0;
         bool is_env_change = true;
@@ -1089,6 +1300,18 @@ namespace Main
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridView commands_list;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cl_command;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cl_adress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cl_data;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label12;
     }
     namespace CompModelEx
     {

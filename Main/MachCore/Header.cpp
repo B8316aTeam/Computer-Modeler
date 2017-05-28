@@ -1,6 +1,17 @@
 #include "Header.h"
 #include "MachCoreClass.h"
-
+bool ChecData(int data)
+{
+	if (data < 0)
+	{
+		if ((data * -1) > MAX_NUMBER)
+			return true;
+	}
+	else
+		if (data > MAX_NUMBER)
+			return true;
+	return false;
+}
 bool Tick(void * mach)
 {
 	MACH_CORE * core = (MACH_CORE*)mach;
@@ -32,7 +43,11 @@ void DeleteMach(void * mach)
 
 bool SetRegData(void * mach, unsigned int reg_id, int data)
 {
-	return ((MACH_CORE*)mach)->SetRegData(reg_id,data);
+	if (!ChecData(data))
+	{
+		return ((MACH_CORE*)mach)->SetRegData(reg_id, data);
+	}
+	return true;
 }
 
 void SetCommandNumber(void * mach, unsigned int number)
@@ -42,17 +57,17 @@ void SetCommandNumber(void * mach, unsigned int number)
 
 bool SetInput(void * mach, int data)
 {
-	if ((data <= MAX_NUMBER) && (data > (MAX_NUMBER *-1)))
+	if (!ChecData(data))
 	{
 		((MACH_CORE *)mach)->SetInputReg(data);
 		return false;
 	}
-	return true;
+	return true;;
 }
 
 bool SetAcum(void * mach, int data)
 {
-	if ((data <= MAX_NUMBER) && (data > (MAX_NUMBER *-1)))
+	if (!ChecData(data))
 	{
 		((MACH_CORE *)mach)->SetAccum(data);
 		return false;

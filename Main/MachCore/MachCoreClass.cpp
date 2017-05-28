@@ -43,6 +43,7 @@ int MACH_CORE::GetData(ADRESS_TYPE adress_type,SIGN_TYPE sign, int data)
 				is_error = true;
 				return 0;
 			}
+			return GetData(none, pos, out);
 		}
 		else
 		{
@@ -53,8 +54,9 @@ int MACH_CORE::GetData(ADRESS_TYPE adress_type,SIGN_TYPE sign, int data)
 			}
 			else
 				out = registers_[data];
+			return GetData(sob, pos, out);
 		}
-		return GetData(none, pos, out);
+
 	}
 	case hash:
 	{
@@ -71,6 +73,7 @@ int MACH_CORE::GetData(ADRESS_TYPE adress_type,SIGN_TYPE sign, int data)
 				MessageBox(NULL, L"Out of memory", CORE_ERROR, NULL);
 				is_error = true;
 			}
+			return GetData(sob, pos, out);
 		}
 		else
 		{
@@ -80,9 +83,12 @@ int MACH_CORE::GetData(ADRESS_TYPE adress_type,SIGN_TYPE sign, int data)
 				is_error = true;
 			}
 			else
+			{
 				out = registers_[data];
+				return GetData(hash, pos, out);
+			}
 		}
-		return GetData(sob, pos, out);
+		break;
 	}
 	default:
 		break;
@@ -107,10 +113,17 @@ void MACH_CORE::SetData(ADRESS_TYPE adress_type, SIGN_TYPE sign, int data)
 	}
 	case none:
 	{
-		if (SetDataMemory(memory_,data,accum_))
+		try
 		{
-			MessageBox(NULL, L"Out of memory", CORE_ERROR, NULL);
-			is_error = true;
+			if (SetDataMemory(memory_, data, OutView(accum_)))
+			{
+				MessageBox(NULL, L"Out of memory", CORE_ERROR, NULL);
+				is_error = true;
+			}
+		}
+		catch (int i)
+		{
+
 		}
 		break;
 	}
@@ -169,9 +182,8 @@ int MACH_CORE::OutView(int number)
 		return out;
 	else
 	{
-		out = number & MAX_NUMBER;
 		if ((out & SIGN_TYPE::minus) == SIGN_TYPE::minus)
-			out |= (MAX_NUMBER + 1);
+			out |= (-1 ^ MAX_NUMBER);
 		return out;
 	}
 }
@@ -180,7 +192,7 @@ int MACH_CORE::InView(int number)
 {
 	int out = number & MAX_NUMBER;
 	if (number < 0)
-		out = number | SIGN_TYPE::minus;
+		out |= SIGN_TYPE::minus;
 	return out;
 }
 
@@ -284,8 +296,7 @@ bool MACH_CORE::Tick()
 		{
 		case htl:
 		{
-			is_error = true;
-			break;
+			throw 1;
 		}
 		case add:
 		{
@@ -349,6 +360,7 @@ bool MACH_CORE::Tick()
 			{
 				MessageBox(NULL, L"Error command number", CORE_ERROR, NULL);
 				is_error = true;
+				throw 1;
 			}
 			else
 				com_counter_ = tmp;
@@ -363,6 +375,7 @@ bool MACH_CORE::Tick()
 				{
 					MessageBox(NULL, L"Error command number", CORE_ERROR, NULL);
 					is_error = true;
+					throw 1;
 				}
 				else
 					com_counter_ = tmp;
@@ -380,6 +393,7 @@ bool MACH_CORE::Tick()
 				{
 					MessageBox(NULL, L"Error command number", CORE_ERROR, NULL);
 					is_error = true;
+					throw 1;
 				}
 				else
 					com_counter_ = tmp;
@@ -397,6 +411,7 @@ bool MACH_CORE::Tick()
 				{
 					MessageBox(NULL, L"Error command number", CORE_ERROR, NULL);
 					is_error = true;
+					throw 1;
 				}
 				else
 					com_counter_ = tmp;
@@ -414,6 +429,7 @@ bool MACH_CORE::Tick()
 				{
 					MessageBox(NULL, L"Error command number", CORE_ERROR, NULL);
 					is_error = true;
+					throw 1;
 				}
 				else
 					com_counter_ = tmp;
@@ -443,8 +459,8 @@ bool MACH_CORE::Tick()
 		default:
 			MessageBox(NULL, L"Unknow command", CORE_ERROR, NULL);
 			is_error = true;
-			break;
+			throw 1;
 		}
 	}
-	return is_error;
+	return false;
 }
