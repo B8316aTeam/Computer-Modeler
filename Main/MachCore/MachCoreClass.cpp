@@ -1,4 +1,4 @@
-#include "MachCoreClass.h"
+﻿#include "MachCoreClass.h"
 #define CORE_ERROR L"Core_error"
 int MACH_CORE::GetData(ADRESS_TYPE adress_type,SIGN_TYPE sign, int data)
 {

@@ -1,4 +1,4 @@
-#include "Specific.h"
+﻿#include "Specific.h"
 #include "Header.h"
 
 int GetData(void * memory, unsigned id_cell)

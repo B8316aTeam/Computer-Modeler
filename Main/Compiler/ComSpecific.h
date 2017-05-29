@@ -1,11 +1,11 @@
-#pragma once
+﻿#pragma once
 #define MAX_NUMBER 8388608
 enum COMMAND
 {
 	htl = 0x00000000,
 	add = 0x10000000,
 	sub = 0x20000000,
-	�div = 0x30000000,
+	сdiv = 0x30000000,
 	mul = 0x40000000,
 	jmp = 0x50000000,
 	jmpz = 0x60000000,

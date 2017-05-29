@@ -1,4 +1,4 @@
-#include "Header.h"
+﻿#include "Header.h"
 #include "MachCoreClass.h"
 bool ChecData(int data)
 {

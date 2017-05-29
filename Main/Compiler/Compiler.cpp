@@ -1,5 +1,5 @@
-#include "Compiler.h"
-#define ERROR_CAP L"Ошибка компиляции"
+п»ї#include "Compiler.h"
+#define ERROR_CAP L"РћС€РёР±РєР° РєРѕРјРїРёР»СЏС†РёРё"
 #define ERROR_MESSAGE(text,var) (wstring(text)+ var).data()
 
 vector<wstring> CompareComWord(LPWSTR source,unsigned * symbol_id , unsigned * line, COMPARE_STATE * compare_state)
@@ -16,7 +16,7 @@ vector<wstring> CompareComWord(LPWSTR source,unsigned * symbol_id , unsigned * l
 			else
 			{
 				*compare_state = COMPARE_STATE::error;
-				MessageBox(NULL, ERROR_MESSAGE(L"Неожиданое завершение команды", out[0]), ERROR_CAP, NULL);
+				MessageBox(NULL, ERROR_MESSAGE(L"РќРµРѕР¶РёРґР°РЅРѕРµ Р·Р°РІРµСЂС€РµРЅРёРµ РєРѕРјР°РЅРґС‹", out[0]), ERROR_CAP, NULL);
 			}
 			return vector<wstring>();
 		}
@@ -25,7 +25,7 @@ vector<wstring> CompareComWord(LPWSTR source,unsigned * symbol_id , unsigned * l
 			if (out.size() > 0)
 			{
 				*compare_state = COMPARE_STATE::error;
-				MessageBox(NULL, ERROR_MESSAGE(L"Неожиданое завершение команды", out[0]), ERROR_CAP, NULL);
+				MessageBox(NULL, ERROR_MESSAGE(L"РќРµРѕР¶РёРґР°РЅРѕРµ Р·Р°РІРµСЂС€РµРЅРёРµ РєРѕРјР°РЅРґС‹", out[0]), ERROR_CAP, NULL);
 				return vector<wstring>();
 			}
 			else
@@ -67,7 +67,7 @@ vector<wstring> CompareComWord(LPWSTR source,unsigned * symbol_id , unsigned * l
 			else
 			{
 				*compare_state = COMPARE_STATE::error;
-				MessageBox(NULL, ERROR_MESSAGE(L"Неожиданое завершение команды", out[0]), ERROR_CAP, NULL);
+				MessageBox(NULL, ERROR_MESSAGE(L"РќРµРѕР¶РёРґР°РЅРѕРµ Р·Р°РІРµСЂС€РµРЅРёРµ РєРѕРјР°РЅРґС‹", out[0]), ERROR_CAP, NULL);
 				return vector<wstring>();
 			}
 			break;
@@ -77,7 +77,7 @@ vector<wstring> CompareComWord(LPWSTR source,unsigned * symbol_id , unsigned * l
 			if (out.size() == 0)
 			{
 				*compare_state = COMPARE_STATE::error;
-				MessageBox(NULL, L"Отсутсвует команда", ERROR_CAP, NULL);
+				MessageBox(NULL, L"РћС‚СЃСѓС‚СЃРІСѓРµС‚ РєРѕРјР°РЅРґР°", ERROR_CAP, NULL);
 				return vector<wstring>();
 			}
 			else
@@ -87,7 +87,7 @@ vector<wstring> CompareComWord(LPWSTR source,unsigned * symbol_id , unsigned * l
 				if (out.size() == 0)
 				{
 					*compare_state = COMPARE_STATE::error;
-					MessageBox(NULL, L"Отсутсвует команда", ERROR_CAP, NULL);
+					MessageBox(NULL, L"РћС‚СЃСѓС‚СЃРІСѓРµС‚ РєРѕРјР°РЅРґР°", ERROR_CAP, NULL);
 					return vector<wstring>();
 				}
 				else
@@ -128,7 +128,7 @@ vector<wstring> CompareComWord(LPWSTR source,unsigned * symbol_id , unsigned * l
 						else
 						{
 							*compare_state = COMPARE_STATE::error;
-							MessageBox(NULL, ERROR_MESSAGE(L"Некорректная команда ", out[0]), ERROR_CAP, NULL);
+							MessageBox(NULL, ERROR_MESSAGE(L"РќРµРєРѕСЂСЂРµРєС‚РЅР°СЏ РєРѕРјР°РЅРґР° ", out[0]), ERROR_CAP, NULL);
 							return vector<wstring>();
 						}
 					}
@@ -146,7 +146,7 @@ vector<wstring> CompareComWord(LPWSTR source,unsigned * symbol_id , unsigned * l
 					if (out.size() == 1)
 					{
 						*compare_state = COMPARE_STATE::error;
-						MessageBox(NULL, ERROR_MESSAGE(L"Некорректная команда ", out[0]), ERROR_CAP, NULL);
+						MessageBox(NULL, ERROR_MESSAGE(L"РќРµРєРѕСЂСЂРµРєС‚РЅР°СЏ РєРѕРјР°РЅРґР° ", out[0]), ERROR_CAP, NULL);
 						return vector<wstring>();
 					}
 					if (out.size() == 2)
@@ -160,7 +160,7 @@ vector<wstring> CompareComWord(LPWSTR source,unsigned * symbol_id , unsigned * l
 					if (source[*symbol_id] == L'-')
 					{
 						*compare_state = COMPARE_STATE::error;
-						MessageBox(NULL, ERROR_MESSAGE(L"Некорректная команда ", out[0]), ERROR_CAP, NULL);
+						MessageBox(NULL, ERROR_MESSAGE(L"РќРµРєРѕСЂСЂРµРєС‚РЅР°СЏ РєРѕРјР°РЅРґР° ", out[0]), ERROR_CAP, NULL);
 						return vector<wstring>();
 					}
 				}
@@ -175,14 +175,14 @@ vector<wstring> CompareComWord(LPWSTR source,unsigned * symbol_id , unsigned * l
 				else
 				{
 					*compare_state = COMPARE_STATE::error;
-					MessageBox(NULL, ERROR_MESSAGE(L"Некорректная команда ", out[0]), ERROR_CAP, NULL);
+					MessageBox(NULL, ERROR_MESSAGE(L"РќРµРєРѕСЂСЂРµРєС‚РЅР°СЏ РєРѕРјР°РЅРґР° ", out[0]), ERROR_CAP, NULL);
 					return vector<wstring>();
 				}
 		}
 		}
 	}
 	*compare_state = COMPARE_STATE::error;
-	MessageBox(NULL, L"Что - то пошло не так....", ERROR_CAP, NULL);
+	MessageBox(NULL, L"Р§С‚Рѕ - С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє....", ERROR_CAP, NULL);
 	return vector<wstring>();
 }
 
@@ -195,7 +195,7 @@ unsigned CompileMachSource(vector<RAW_COM> commands, void ** mach_source)
 	{
 		if (curr_raw_command->command_.size() > 3)
 		{
-			MessageBox(NULL, L"Некорректная команда", ERROR_CAP, NULL);
+			MessageBox(NULL, L"РќРµРєРѕСЂСЂРµРєС‚РЅР°СЏ РєРѕРјР°РЅРґР°", ERROR_CAP, NULL);
 			return curr_raw_command->line_;
 		}
 		if (curr_raw_command->command_.size() == 0)
@@ -220,7 +220,7 @@ unsigned CompileMachSource(vector<RAW_COM> commands, void ** mach_source)
 			}
 			if (is_search)
 			{
-				MessageBox(NULL, ERROR_MESSAGE(L"Конфликт контрольных точек. Данная точка уже существует ", curr_raw_command->command_[0]), ERROR_CAP, NULL);
+				MessageBox(NULL, ERROR_MESSAGE(L"РљРѕРЅС„Р»РёРєС‚ РєРѕРЅС‚СЂРѕР»СЊРЅС‹С… С‚РѕС‡РµРє. Р”Р°РЅРЅР°СЏ С‚РѕС‡РєР° СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ ", curr_raw_command->command_[0]), ERROR_CAP, NULL);
 				return curr_raw_command->line_;
 			}
 			else
@@ -228,7 +228,7 @@ unsigned CompileMachSource(vector<RAW_COM> commands, void ** mach_source)
 		}
 		else
 		{
-			MessageBox(NULL, L"Некорректная команда", ERROR_CAP, NULL);
+			MessageBox(NULL, L"РќРµРєРѕСЂСЂРµРєС‚РЅР°СЏ РєРѕРјР°РЅРґР°", ERROR_CAP, NULL);
 			return curr_raw_command->line_;
 		}
 	}
@@ -257,7 +257,7 @@ unsigned CompileMachSource(vector<RAW_COM> commands, void ** mach_source)
 				commands_list += L"\n";
 				continue;
 			}
-			MessageBox(NULL, ERROR_MESSAGE(L"Неизвестная команда", curr_raw_command->command_.back()), ERROR_CAP, NULL);
+			MessageBox(NULL, ERROR_MESSAGE(L"РќРµРёР·РІРµСЃС‚РЅР°СЏ РєРѕРјР°РЅРґР°", curr_raw_command->command_.back()), ERROR_CAP, NULL);
 			return curr_raw_command->line_;
 		}
 		bool is_error = false;
@@ -274,7 +274,7 @@ unsigned CompileMachSource(vector<RAW_COM> commands, void ** mach_source)
 			commands_list += L"\n";
 			if (is_error)
 			{
-				MessageBox(NULL, ERROR_MESSAGE(L"Ошибка при определении числа ", curr_raw_command->command_.back()), ERROR_CAP, NULL);
+				MessageBox(NULL, ERROR_MESSAGE(L"РћС€РёР±РєР° РїСЂРё РѕРїСЂРµРґРµР»РµРЅРёРё С‡РёСЃР»Р° ", curr_raw_command->command_.back()), ERROR_CAP, NULL);
 				return curr_raw_command->line_;
 			}
 			if (curr_raw_command->command_[1] == L"none")
@@ -301,7 +301,7 @@ unsigned CompileMachSource(vector<RAW_COM> commands, void ** mach_source)
 			}
 			if (curr_raw_command->command_[0] == L"div")
 			{
-				out->commands_[command_id-1] |= COMMAND::сdiv;
+				out->commands_[command_id-1] |= COMMAND::СЃdiv;
 				continue;
 			}
 			if (curr_raw_command->command_[0] == L"mul")
@@ -344,7 +344,7 @@ unsigned CompileMachSource(vector<RAW_COM> commands, void ** mach_source)
 				out->commands_[command_id-1] |= COMMAND::jmpgz;
 				continue;
 			}
-			MessageBox(NULL, ERROR_MESSAGE(L"Неизвестная команда", curr_raw_command->command_[0]), ERROR_CAP, NULL);
+			MessageBox(NULL, ERROR_MESSAGE(L"РќРµРёР·РІРµСЃС‚РЅР°СЏ РєРѕРјР°РЅРґР°", curr_raw_command->command_[0]), ERROR_CAP, NULL);
 			return curr_raw_command->line_;
 		}
 		else
@@ -368,7 +368,7 @@ unsigned CompileMachSource(vector<RAW_COM> commands, void ** mach_source)
 				}
 				if (!is_search)
 				{
-					MessageBox(NULL, ERROR_MESSAGE(L"Невозможно найти контрольную точку ", curr_raw_command->command_[2]), ERROR_CAP, NULL);
+					MessageBox(NULL, ERROR_MESSAGE(L"РќРµРІРѕР·РјРѕР¶РЅРѕ РЅР°Р№С‚Рё РєРѕРЅС‚СЂРѕР»СЊРЅСѓСЋ С‚РѕС‡РєСѓ ", curr_raw_command->command_[2]), ERROR_CAP, NULL);
 					return curr_raw_command->line_;
 				}
 			}
@@ -401,7 +401,7 @@ unsigned CompileMachSource(vector<RAW_COM> commands, void ** mach_source)
 				out->commands_[command_id-1] |= COMMAND::jmpgz;
 				continue;
 			}
-			MessageBox(NULL, ERROR_MESSAGE(L"Неизвестная команда", curr_raw_command->command_[0]), ERROR_CAP, NULL);
+			MessageBox(NULL, ERROR_MESSAGE(L"РќРµРёР·РІРµСЃС‚РЅР°СЏ РєРѕРјР°РЅРґР°", curr_raw_command->command_[0]), ERROR_CAP, NULL);
 			return curr_raw_command->line_;
 		}
 	}

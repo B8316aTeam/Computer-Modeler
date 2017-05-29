@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 struct MACH_STATE
 {
 	int registers[8];

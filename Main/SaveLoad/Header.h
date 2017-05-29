@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include<Windows.h>
 
 struct MACH_STATE 

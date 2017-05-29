@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #define MAX_NUMBER 8388607
 enum SIGN_TYPE
 {
