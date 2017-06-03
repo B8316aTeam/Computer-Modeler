@@ -222,9 +222,9 @@ int MACH_CORE::GetRegData(unsigned id_reg)
 	return OutView(registers_[id_reg]);
 }
 
-int MACH_CORE::GetFullState()
+bool MACH_CORE::GetFullState()
 {
-	return full_reg_;
+	return 0;
 }
 
 int MACH_CORE::GetInputReg()
@@ -317,9 +317,9 @@ bool MACH_CORE::Tick()
 				x2 = GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER);
 			x1 -= x2;
 			if ((x1 < (MAX_NUMBER *-1)) || (x1 > MAX_NUMBER))
-				full_reg_ = 1;
+				full_reg_ = true;
 			else
-				full_reg_ = 0;
+				full_reg_ = false;
 			accum_ = InView(x1);
 			com_counter_++;
 			break;
@@ -338,9 +338,9 @@ bool MACH_CORE::Tick()
 				x2 = GetData(ADRESS_TYPE(command & reg), SIGN_TYPE(command & minus), command & MAX_NUMBER);
 			x1 -= x2;
 			if ((x1 < (MAX_NUMBER *-1)) || (x1 > MAX_NUMBER))
-				full_reg_ = 1;
+				full_reg_ = true;
 			else
-				full_reg_ = 0;
+				full_reg_ = false;
 			accum_ = InView(x1);
 			com_counter_++;
 			break;

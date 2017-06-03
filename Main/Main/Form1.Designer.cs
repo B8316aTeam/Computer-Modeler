@@ -313,7 +313,7 @@ namespace Main
                 is_env_change = false;
                 textbox_reg7.Text = Convert.ToString(CompModelEx.MachCore.GetRegData(mach_core, 7), osn);
 
-                textbox_full_reg.Text = Convert.ToString(CompModelEx.MachCore.GetFullReg(mach_core));
+                //textbox_full_reg.Text = Convert.ToString(CompModelEx.MachCore.GetFullReg(mach_core));
                 is_env_change = true;
             }
         }
@@ -342,13 +342,11 @@ namespace Main
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Панель = new System.Windows.Forms.Panel();
-            this.textbox_full_reg = new System.Windows.Forms.TextBox();
             this.textbox_com_counter = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.reset = new System.Windows.Forms.Button();
@@ -554,13 +552,11 @@ namespace Main
             // Панель
             // 
             this.Панель.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Панель.Controls.Add(this.textbox_full_reg);
             this.Панель.Controls.Add(this.textbox_com_counter);
             this.Панель.Controls.Add(this.label21);
             this.Панель.Controls.Add(this.label20);
             this.Панель.Controls.Add(this.label19);
             this.Панель.Controls.Add(this.label14);
-            this.Панель.Controls.Add(this.label11);
             this.Панель.Controls.Add(this.label13);
             this.Панель.Controls.Add(this.label8);
             this.Панель.Controls.Add(this.reset);
@@ -590,14 +586,6 @@ namespace Main
             this.Панель.Size = new System.Drawing.Size(338, 429);
             this.Панель.TabIndex = 6;
             this.Панель.Tag = "";
-            // 
-            // textbox_full_reg
-            // 
-            this.textbox_full_reg.Location = new System.Drawing.Point(194, 117);
-            this.textbox_full_reg.Name = "textbox_full_reg";
-            this.textbox_full_reg.Size = new System.Drawing.Size(122, 20);
-            this.textbox_full_reg.TabIndex = 29;
-            this.textbox_full_reg.TextChanged += new System.EventHandler(this.textBox12_TextChanged);
             // 
             // textbox_com_counter
             // 
@@ -629,7 +617,7 @@ namespace Main
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(135, 152);
+            this.label19.Location = new System.Drawing.Point(191, 101);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(73, 13);
             this.label19.TabIndex = 25;
@@ -638,26 +626,16 @@ namespace Main
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(201, 51);
+            this.label14.Location = new System.Drawing.Point(191, 47);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(66, 13);
             this.label14.TabIndex = 24;
             this.label14.Text = "Тип данных";
             // 
-            // label11
-            // 
-            this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(201, 101);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(81, 13);
-            this.label11.TabIndex = 21;
-            this.label11.Text = "Переполнение";
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(41, 51);
+            this.label13.Location = new System.Drawing.Point(28, 51);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(92, 13);
             this.label13.TabIndex = 23;
@@ -687,7 +665,7 @@ namespace Main
             // 
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(41, 101);
+            this.label9.Location = new System.Drawing.Point(28, 101);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(88, 13);
             this.label9.TabIndex = 19;
@@ -861,9 +839,9 @@ namespace Main
             this.textbox_accum.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textbox_accum.Location = new System.Drawing.Point(31, 172);
+            this.textbox_accum.Location = new System.Drawing.Point(194, 117);
             this.textbox_accum.Name = "textbox_accum";
-            this.textbox_accum.Size = new System.Drawing.Size(285, 20);
+            this.textbox_accum.Size = new System.Drawing.Size(130, 20);
             this.textbox_accum.TabIndex = 5;
             this.textbox_accum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textbox_accum.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
@@ -1266,14 +1244,12 @@ namespace Main
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button reset;
         private System.Windows.Forms.Button res_start_state;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox textbox_full_reg;
         private System.Windows.Forms.TextBox textbox_com_counter;
         private unsafe void* mach_source;
         private unsafe void* mach_core;

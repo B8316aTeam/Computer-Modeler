@@ -10,7 +10,7 @@ public:
 	MACH_CORE(void * memory);
 	int GetAccum();
 	int GetRegData(unsigned id_reg);
-	int GetFullState();
+	bool GetFullState();
 	int GetInputReg();
 	void SetNewMemory(void * memory);
 	void * GetMemory();
@@ -31,7 +31,7 @@ private:
 	int input_reg;
 	unsigned com_counter_;
 	void * memory_;
-	int full_reg_;
+	bool full_reg_;
 	bool is_error = false;
 	int GetData(ADRESS_TYPE adress_type, SIGN_TYPE sign, int data);
 	void SetData(ADRESS_TYPE adress_type, SIGN_TYPE sign, int data);

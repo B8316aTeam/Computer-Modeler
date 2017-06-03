@@ -68,7 +68,7 @@ namespace Main
                     UpdateMemory(true);
                 }
                 this.label9.Visible = true;
-                this.label11.Visible = true;
+                //this.label11.Visible = true;
                 this.res_start_state.Visible = true;
                 this.button4.Visible = true;
                 this.button5.Visible = true;
