@@ -46,7 +46,7 @@ namespace Main
             }
             catch (ArgumentOutOfRangeException err)
             {
-
+                button10_Click(1, EventArgs.Empty);
             }
             UpdateCoreState();
             UpdateMemory(false);
@@ -1049,18 +1049,18 @@ namespace Main
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.trackBar1);
-            this.groupBox1.Controls.Add(this.button10);
             this.groupBox1.Controls.Add(this.button9);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.panel2);
             this.groupBox1.Controls.Add(this.code_block);
             this.groupBox1.Controls.Add(this.Панель);
             this.groupBox1.Controls.Add(this.commands_list);
-            this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.button6);
+            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Controls.Add(this.button10);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
